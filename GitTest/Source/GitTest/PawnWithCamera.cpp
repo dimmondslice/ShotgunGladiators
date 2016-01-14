@@ -53,7 +53,7 @@ void APawnWithCamera::Tick( float DeltaTime )
 	}
 	else
 	{
-		ZoomFactor -= DeltaTime / 0.25f; // zoom out over a quater of a second
+		ZoomFactor -= DeltaTime / 0.25f; // zoom out over a quarter of a second
 	}
 	ZoomFactor = FMath::Clamp<float>(ZoomFactor, 0.0f, 1.0f);
 	//blend our camera's FOV and our springArms length based on zoomfactor
@@ -69,8 +69,11 @@ void APawnWithCamera::Tick( float DeltaTime )
 		//rotate the camera's pitch, but limit it so we're always looking downward
 		FRotator newRot2 = OurCameraSpringArm->GetComponentRotation();
 		newRot2.Pitch = FMath::Clamp(newRot2.Pitch + CameraInput.Y, -80.0f, -15.0f);
-		//newRot.Roll = FMath::Clamp()
 		OurCameraSpringArm->SetWorldRotation(newRot2);
+
+		FRotator newRot3 = OurCamera->GetComponentRotation();
+		newRot3.Roll = FMath::Lerp<float>(newRot.Roll, 120.0f * MovementInput.Y, DeltaTime);
+		OurCamera->SetWorldRotation(newRot3);
 	}
 
 	//handle movememnt based on out movex and movey axes
