@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<ItemGroup>
+		<None Include="..\..\GitTest.uproject" />
+		<Filter Include="Source">
+			<UniqueIdentifier>{5DF93E80-6F0B-45B7-A7E3-EFBADC8DD64A}</UniqueIdentifier>
+		</Filter>
+		<None Include="..\..\Source\GitTest.Target.cs">
+			<Filter>Source</Filter>
+		</None >
+		<None Include="..\..\Source\GitTestEditor.Target.cs">
+			<Filter>Source</Filter>
+		</None >
+		<Filter Include="Config">
+			<UniqueIdentifier>{547400A2-574A-4EC7-822A-69AFCDFE9DEB}</UniqueIdentifier>
+		</Filter>
+		<None Include="..\..\Config\DefaultEditor.ini">
+			<Filter>Config</Filter>
+		</None >
+		<None Include="..\..\Config\DefaultEditorPerProjectUserSettings.ini">
+			<Filter>Config</Filter>
+		</None >
+		<None Include="..\..\Config\DefaultEngine.ini">
+			<Filter>Config</Filter>
+		</None >
+		<None Include="..\..\Config\DefaultGame.ini">
+			<Filter>Config</Filter>
+		</None >
+		<None Include="..\..\Config\DefaultInput.ini">
+			<Filter>Config</Filter>
+		</None >
+		<Filter Include="Source\GitTest">
+			<UniqueIdentifier>{727854EB-C0E3-4655-BD50-9C069AAE38C4}</UniqueIdentifier>
+		</Filter>
+		<None Include="..\..\Source\GitTest\GitTest.Build.cs">
+			<Filter>Source\GitTest</Filter>
+		</None >
+		<ClCompile Include="..\..\Source\GitTest\GitTest.cpp">
+			<Filter>Source\GitTest</Filter>
+		</ClCompile >
+		<ClInclude Include="..\..\Source\GitTest\GitTest.h">
+			<Filter>Source\GitTest</Filter>
+		</ClInclude >
+		<ClCompile Include="..\..\Source\GitTest\GitTestCharacter.cpp">
+			<Filter>Source\GitTest</Filter>
+		</ClCompile >
+		<ClInclude Include="..\..\Source\GitTest\GitTestCharacter.h">
+			<Filter>Source\GitTest</Filter>
+		</ClInclude >
+		<ClCompile Include="..\..\Source\GitTest\GitTestGameMode.cpp">
+			<Filter>Source\GitTest</Filter>
+		</ClCompile >
+		<ClInclude Include="..\..\Source\GitTest\GitTestGameMode.h">
+			<Filter>Source\GitTest</Filter>
+		</ClInclude >
+		<ClCompile Include="..\..\Source\GitTest\GitTestHUD.cpp">
+			<Filter>Source\GitTest</Filter>
+		</ClCompile >
+		<ClInclude Include="..\..\Source\GitTest\GitTestHUD.h">
+			<Filter>Source\GitTest</Filter>
+		</ClInclude >
+		<ClCompile Include="..\..\Source\GitTest\GitTestProjectile.cpp">
+			<Filter>Source\GitTest</Filter>
+		</ClCompile >
+		<ClInclude Include="..\..\Source\GitTest\GitTestProjectile.h">
+			<Filter>Source\GitTest</Filter>
+		</ClInclude >
+		<ClCompile Include="..\..\Source\GitTest\PawnWithCamera.cpp">
+			<Filter>Source\GitTest</Filter>
+		</ClCompile >
+		<ClInclude Include="..\..\Source\GitTest\PawnWithCamera.h">
+			<Filter>Source\GitTest</Filter>
+		</ClInclude >
+	</ItemGroup>
+</Project>
