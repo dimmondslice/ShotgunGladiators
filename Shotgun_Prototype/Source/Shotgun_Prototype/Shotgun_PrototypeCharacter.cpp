@@ -65,8 +65,8 @@ void AShotgun_PrototypeCharacter::SetupPlayerInputComponent(class UInputComponen
 		InputComponent->BindAction("Fire", IE_Pressed, this, &AShotgun_PrototypeCharacter::OnFire);
 	}
 	
-	InputComponent->BindAxis("MoveForward", this, &AShotgun_PrototypeCharacter::MoveForward);
-	InputComponent->BindAxis("MoveRight", this, &AShotgun_PrototypeCharacter::MoveRight);
+	//InputComponent->BindAxis("MoveForward", this, &AShotgun_PrototypeCharacter::MoveForward);
+	//InputComponent->BindAxis("MoveRight", this, &AShotgun_PrototypeCharacter::MoveRight);
 	
 	// We have 2 versions of the rotation bindings to handle different kinds of devices differently
 	// "turn" handles devices that provide an absolute delta, such as a mouse.

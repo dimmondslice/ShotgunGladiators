@@ -48,17 +48,20 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
 	class UAnimMontage* FireAnimation;
 
-protected:
+
 	
 	/** Fires a projectile. */
 	void OnFire();
 
 	/** Handles moving forward/backward */
+	UFUNCTION(BlueprintCallable, Category = "Movement")
 	void MoveForward(float Val);
 
 	/** Handles stafing movement, left and right */
+	UFUNCTION(BlueprintCallable, Category = "Movement")
 	void MoveRight(float Val);
 
+protected:
 	/**
 	 * Called via input to turn at a given rate.
 	 * @param Rate	This is a normalized rate, i.e. 1.0 means 100% of desired turn rate
