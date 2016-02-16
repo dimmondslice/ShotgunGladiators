@@ -6,6 +6,6 @@ public class Shotgun_Prototype : ModuleRules
 {
 	public Shotgun_Prototype(TargetInfo Target)
 	{
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "OnlineSubsystemNull" });
 	}
 }
