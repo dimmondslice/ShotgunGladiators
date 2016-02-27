@@ -1,9 +1,9 @@
-#N canvas 612 241 828 573 10;
+#N canvas 1190 196 828 476 10;
 #X declare -lib mrpeach;
 #X obj 23 23 import mrpeach;
 #X obj 49 68 udpreceive 8000;
 #X obj 49 119 unpackOSC;
-#N canvas 1265 411 450 368 loadsoundfiles 1;
+#N canvas 1265 411 450 368 loadsoundfiles 0;
 #X obj 7 65 inlet;
 #X obj -19 183 soundfiler;
 #N canvas 724 0 1013 978 samplebuffers 0;
@@ -49,8 +49,8 @@
 #X connect 11 0 10 0;
 #X restore 273 64 pd loadsoundfiles;
 #X obj 274 24 loadbang;
-#N canvas -278 337 1914 711 playgunshot 0;
-#X obj 322 162 inlet;
+#N canvas 0 742 1914 711 playgunshot 0;
+#X obj 334 147 inlet;
 #X obj 348 496 dac~;
 #X obj 330 195 random 2;
 #X obj 359 245 route 0 1 2;
@@ -59,8 +59,7 @@
 #X obj 684 502 dac~;
 #X obj 532 339 tabplay~ shotgun_shot2;
 #X obj 693 342 tabplay~ shotgun_shot3;
-#X obj 455 102 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
--1 -1;
+#X connect 0 0 2 0;
 #X connect 2 0 3 0;
 #X connect 3 0 4 0;
 #X connect 3 1 7 0;
@@ -71,25 +70,29 @@
 #X connect 7 0 5 1;
 #X connect 8 0 6 0;
 #X connect 8 0 6 1;
-#X connect 9 0 2 0;
 #X restore 41 225 pd playgunshot;
 #X obj 237 12 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
 -1;
-#N canvas 432 294 1914 322 crowd 0;
-#X obj 120 151 *~;
-#X obj 107 -33 inlet;
-#X obj 158 -33 loadbang;
-#X obj 182 22 tabplay~ crowd_cheer;
-#X obj 235 -15 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
--1 -1;
-#X connect 1 0 0 0;
-#X connect 2 0 3 0;
-#X connect 3 0 0 1;
-#X connect 3 1 4 0;
-#X connect 4 0 3 0;
-#X restore 353 223 pd crowd;
+#N canvas 942 403 1914 427 crowd 1;
+#X obj 275 -19 loadbang;
+#X obj 280 49 tabplay~ crowd_cheer;
+#X obj 327 14 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 267 182 dac~;
+#X obj 91 10 inlet;
+#X obj 268 124 *~;
+#X obj 154 110 print;
+#X connect 0 0 1 0;
+#X connect 1 0 5 1;
+#X connect 1 1 2 0;
+#X connect 2 0 1 0;
+#X connect 4 0 5 0;
+#X connect 4 0 6 0;
+#X connect 5 0 3 0;
+#X connect 5 0 3 1;
+#X restore 360 224 pd crowd;
 #X obj 48 168 routeOSC /player/guns;
-#X obj 356 169 routeOSC /crowd;
+#X obj 361 171 routeOSC /crowd;
 #N canvas 809 278 719 557 playhitmarker 0;
 #X obj -252 484 dac~;
 #X obj -194 114 tabplay~ hitmarker;
