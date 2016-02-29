@@ -3,6 +3,10 @@
 #include "Shotgun_PrototypeProjectile.h"
 #include "Animation/AnimInstance.h"
 #include "GameFramework/InputSettings.h"
+#include "UpperBodyState.h"
+#include "LowerBodyState.h"
+#include "WalkingState.h"
+#include "IdleState.h"
 
 DEFINE_LOG_CATEGORY_STATIC(LogFPChar, Warning, All);
 
@@ -44,6 +48,12 @@ AGladiator::AGladiator()
 
 	// Note: The ProjectileClass and the skeletal mesh/anim blueprints for Mesh1P are set in the
 	// derived blueprint asset named MyCharacter (to avoid direct content references in C++)
+
+	Idle = CreateAbstractDefaultSubobject<UIdleState>(TEXT("IdleStateComponent"));
+	CurrentUpperState = Idle;
+
+	Walking = CreateAbstractDefaultSubobject<UWalkingState>(TEXT("WalkingStateComponent"));
+	CurrentLowerState = Walking;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -212,4 +222,21 @@ bool AGladiator::EnableTouchscreenMovement(class UInputComponent* InputComponent
 		InputComponent->BindTouch(EInputEvent::IE_Repeat, this, &AGladiator::TouchUpdate);
 	}
 	return bResult;
+}
+
+void AGladiator::Tick(float DeltaSeconds)
+{
+	//update current states
+	CurrentUpperState->TickState(DeltaSeconds);
+	CurrentLowerState->TickState(DeltaSeconds);
+}
+
+void AGladiator::ChangeUpperState(UUpperBodyState* newState)
+{
+	CurrentUpperState->ChangeUpperState(newState);
+}
+
+void AGladiator::ChangeLowerState(ULowerBodyState* newState)
+{
+	CurrentLowerState->ChangeLowerState(newState);
 }

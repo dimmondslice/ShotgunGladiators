@@ -2,6 +2,9 @@
 
 #include "Shotgun_Prototype.h"
 #include "GladiatorState.h"
+#include "UpperBodyState.h"
+#include "LowerBodyState.h"
+#include "Gladiator.h"
 
 
 // Sets default values for this component's properties
@@ -12,7 +15,8 @@ UGladiatorState::UGladiatorState()
 	bWantsBeginPlay = true;
 	PrimaryComponentTick.bCanEverTick = true;
 
-	// ...
+	//grab reference to the owner of the actor component and cast it as a Gladiator*, save it to Owner Member variable
+	Owner = (AGladiator*)GetOwner();
 }
 
 
@@ -34,8 +38,9 @@ void UGladiatorState::TickComponent( float DeltaTime, ELevelTick TickType, FActo
 	// ...
 }
 
-void UGladiatorState::TickState(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction * ThisTickFunction)
+void UGladiatorState::TickState(float DeltaTime)
 {
+	
 }
 
 void UGladiatorState::OnBeginState()
@@ -50,11 +55,25 @@ void UGladiatorState::PauseState()
 {
 }
 
-void UGladiatorState::ChangeUpperState(UGladiatorState * newState)
+void UGladiatorState::ChangeUpperState(UUpperBodyState* newState)
 {
+	if (newState->bCanUse)
+	{
+		Owner->CurrentUpperState->OnStopState();
+		Owner->PreviousUpperState = Owner->CurrentUpperState;
+		Owner->CurrentUpperState = newState;
+		Owner->CurrentUpperState->OnBeginState();
+	}
 }
 
-void UGladiatorState::ChangeLowerState(UGladiatorState * newState)
+void UGladiatorState::ChangeLowerState(ULowerBodyState* newState)
 {
+	if (newState->bCanUse)
+	{
+		Owner->CurrentLowerState->OnStopState();
+		Owner->PreviousLowerState = Owner->CurrentLowerState;
+		Owner->CurrentLowerState = newState;
+		Owner->CurrentLowerState->OnBeginState();
+	}
 }
 

@@ -10,6 +10,8 @@ class SHOTGUN_PROTOTYPE_API AGladiator : public ACharacter
 {
 	GENERATED_BODY()
 
+	friend class UGladiatorState;
+
 		/** Pawn mesh: 1st person view (arms; seen only by self) */
 		UPROPERTY(VisibleDefaultsOnly, Category = Mesh)
 	class USkeletalMeshComponent* Mesh1P;
@@ -24,6 +26,9 @@ class SHOTGUN_PROTOTYPE_API AGladiator : public ACharacter
 public:
 	AGladiator();
 
+//==================================================================================================
+//Their Stuff
+//==================================================================================================
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
 		float BaseTurnRate;
@@ -104,5 +109,51 @@ public:
 	/** Returns FirstPersonCameraComponent subobject **/
 	FORCEINLINE class UCameraComponent* GetFirstPersonCameraComponent() const { return FirstPersonCameraComponent; }
 
+
+//==================================================================================================
+//Our Stuff
+//==================================================================================================
+public:
+	virtual void Tick(float DeltaSeconds) override;
+
+protected:
 	
+	//Current states for the gladiators upper and lower bodies
+    class UUpperBodyState* CurrentUpperState;
+	class ULowerBodyState* CurrentLowerState;
+	//These hold the previous state for each half of the body
+	UUpperBodyState* PreviousUpperState;
+	ULowerBodyState* PreviousLowerState;
+
+	/**Changes the current upper body state */
+	virtual void ChangeUpperState(UUpperBodyState* newState);
+	/**Changes the current lower body state */
+	virtual void ChangeLowerState(ULowerBodyState* newState);
+	
+	//references to every state this gladiator has attached to it
+	UPROPERTY(VisibleAnywhere)
+	class UIdleState* Idle;
+	UPROPERTY(VisibleAnywhere)
+	class UShootingState* Shooting;
+	UPROPERTY(VisibleAnywhere)
+	class UReloadingState* reloading;
+	UPROPERTY(VisibleAnywhere)
+	class URaiseShieldState* RaisingShield;
+	UPROPERTY(VisibleAnywhere)
+	class ULowerShieldState* LowerShield;
+	UPROPERTY(VisibleAnywhere)
+	class UHoldingShieldState* HoldingShield;
+	UPROPERTY(VisibleAnywhere)
+	class UShieldBashState* ShieldBash;
+	////lower body
+	UPROPERTY(VisibleAnywhere)
+	class UWalkingState* Walking;
+	UPROPERTY(VisibleAnywhere)
+	class UDodgeState* Dodge;
+	UPROPERTY(VisibleAnywhere)
+	class UJumpCrouchState* JumpCrouch;
+	UPROPERTY(VisibleAnywhere)
+	class UFallingState* falling;
+	UPROPERTY(VisibleAnywhere)
+	class ULandingState* landing;
 };
