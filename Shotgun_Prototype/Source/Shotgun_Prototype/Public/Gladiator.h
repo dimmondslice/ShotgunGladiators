@@ -136,7 +136,7 @@ protected:
 	UPROPERTY(VisibleAnywhere)
 	class UShootingState* Shooting;
 	UPROPERTY(VisibleAnywhere)
-	class UReloadingState* reloading;
+	class UReloadingState* Reloading;
 	UPROPERTY(VisibleAnywhere)
 	class URaiseShieldState* RaisingShield;
 	UPROPERTY(VisibleAnywhere)
@@ -145,7 +145,7 @@ protected:
 	class UHoldingShieldState* HoldingShield;
 	UPROPERTY(VisibleAnywhere)
 	class UShieldBashState* ShieldBash;
-	////lower body
+	//lower body
 	UPROPERTY(VisibleAnywhere)
 	class UWalkingState* Walking;
 	UPROPERTY(VisibleAnywhere)
@@ -153,7 +153,7 @@ protected:
 	UPROPERTY(VisibleAnywhere)
 	class UJumpCrouchState* JumpCrouch;
 	UPROPERTY(VisibleAnywhere)
-	class UFallingState* falling;
+	class UFallingState* Falling;
 	UPROPERTY(VisibleAnywhere)
-	class ULandingState* landing;
+	class ULandingState* Landing;
 };

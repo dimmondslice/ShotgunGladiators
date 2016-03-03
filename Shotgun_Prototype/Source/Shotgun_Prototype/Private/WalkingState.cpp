@@ -5,5 +5,5 @@
 
 void UWalkingState::TickState(float DeltaTime)
 {
-	//UE_LOG(LogTemp, Warning, TEXT("Walking State"));
+	   //UE_LOG(LogTemp, Warning, TEXT("Walking State"));
 }

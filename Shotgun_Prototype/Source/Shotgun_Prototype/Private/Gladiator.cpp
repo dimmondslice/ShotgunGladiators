@@ -3,10 +3,23 @@
 #include "Shotgun_PrototypeProjectile.h"
 #include "Animation/AnimInstance.h"
 #include "GameFramework/InputSettings.h"
+
 #include "UpperBodyState.h"
 #include "LowerBodyState.h"
-#include "WalkingState.h"
+
 #include "IdleState.h"
+#include "ShootingState.h"
+#include "ReloadingState.h"
+#include "RaiseShieldState.h"
+#include "LowerShieldState.h"
+#include "HoldingShieldState.h"
+#include "ShieldBashState.h"
+
+#include "WalkingState.h"
+#include "DodgeState.h"
+#include "JumpCrouchState.h"
+#include "FallingState.h"
+#include "LandingState.h"
 
 DEFINE_LOG_CATEGORY_STATIC(LogFPChar, Warning, All);
 
@@ -49,10 +62,22 @@ AGladiator::AGladiator()
 	// Note: The ProjectileClass and the skeletal mesh/anim blueprints for Mesh1P are set in the
 	// derived blueprint asset named MyCharacter (to avoid direct content references in C++)
 
-	Idle = CreateAbstractDefaultSubobject<UIdleState>(TEXT("IdleStateComponent"));
-	CurrentUpperState = Idle;
 
-	Walking = CreateAbstractDefaultSubobject<UWalkingState>(TEXT("WalkingStateComponent"));
+	Idle = CreateDefaultSubobject<UIdleState>(TEXT("IdleState"));
+	Shooting = CreateDefaultSubobject<UShootingState>(TEXT("ShootingState"));
+	Reloading = CreateDefaultSubobject<UReloadingState>(TEXT("ReloadingState"));
+	RaisingShield = CreateDefaultSubobject<URaiseShieldState>(TEXT("RaisingShield"));
+	LowerShield = CreateDefaultSubobject<ULowerShieldState>(TEXT("LowerShield"));
+	HoldingShield = CreateDefaultSubobject<UHoldingShieldState>(TEXT("HoldingShield"));
+	ShieldBash = CreateDefaultSubobject<UShieldBashState>(TEXT("ShieldBash"));
+
+	Walking = CreateDefaultSubobject<UWalkingState>(TEXT("WalkingState"));
+	Dodge = CreateDefaultSubobject<UDodgeState>(TEXT("DodgeState"));
+	JumpCrouch = CreateDefaultSubobject<UJumpCrouchState>(TEXT("JumpCrouch"));
+	Falling = CreateDefaultSubobject<UFallingState>(TEXT("FallingState"));
+	Landing = CreateDefaultSubobject<ULandingState>(TEXT("Landing"));
+
+	CurrentUpperState = Idle;
 	CurrentLowerState = Walking;
 }
 
