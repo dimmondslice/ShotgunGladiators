@@ -2,7 +2,15 @@
 
 #include "Shotgun_Prototype.h"
 #include "LandingState.h"
+#include "WalkingState.h"
 
+void ULandingState::TickState(float DeltaTime)
+{
+	TimeSinceStateStarted += DeltaTime;
+	if (TimeSinceStateStarted > .2f)
+		ChangeLowerState(Owner->Walking);
+}
 
-
-
+void ULandingState::ProcessInput()
+{
+}
