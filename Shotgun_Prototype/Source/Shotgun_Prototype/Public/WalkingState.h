@@ -14,4 +14,5 @@ class SHOTGUN_PROTOTYPE_API UWalkingState : public ULowerBodyState
 	  GENERATED_BODY()
 
 	  virtual void TickState(float DeltaTime) override;
+	  virtual void ProcessInput() override;
 };
