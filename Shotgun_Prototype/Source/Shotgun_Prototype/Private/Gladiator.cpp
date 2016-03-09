@@ -251,7 +251,9 @@ bool AGladiator::EnableTouchscreenMovement(class UInputComponent* InputComponent
 
 void AGladiator::Tick(float DeltaSeconds)
 {
-	//update current states
+    Super::Tick(DeltaSeconds);
+    
+    //update current states
 	CurrentUpperState->TickState(DeltaSeconds);
 	CurrentLowerState->TickState(DeltaSeconds);
 }
