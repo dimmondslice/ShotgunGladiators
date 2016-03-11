@@ -10,14 +10,14 @@ void UWalkingState::TickState(float DeltaTime)
 	   
 }
 
-void UWalkingState::ProcessInput()
+void UWalkingState::ProcessInput(float DeltaTime)
 {
-	Super::ProcessInput();
-	if (Owner->bJumpInput)
+	Super::ProcessInput(DeltaTime);
+	if (Owner->bJumpAction)
 	{
 		ChangeLowerState(Owner->JumpCrouch);
 	}
-
-	Owner->MoveForward(InputComp->GetAxisValue(TEXT("MoveForward")));
-	Owner->MoveRight(InputComp->GetAxisValue(TEXT("MoveRight")));
+	float xSpeed = Owner->MoveForwardAxis * Owner->WalkSpeed;
+	float ySpeed = Owner->MoveRightAxis * Owner->WalkSpeed;
+	MoveDirection(xSpeed, ySpeed);
 }

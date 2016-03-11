@@ -7,6 +7,6 @@ void UIdleState::TickState(float DeltaTime)
 {
 }
 
-void UIdleState::ProcessInput()
+void UIdleState::ProcessInput(float DeltaTime)
 {
 }

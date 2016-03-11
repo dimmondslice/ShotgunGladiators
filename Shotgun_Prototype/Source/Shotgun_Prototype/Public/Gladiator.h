@@ -57,14 +57,6 @@ public:
 	/** Fires a projectile. */
 	void OnFire();
 
-	/** Handles moving forward/backward */
-	UFUNCTION(BlueprintCallable, Category = "Movement")
-		void MoveForward(float Val);
-
-	/** Handles stafing movement, left and right */
-	UFUNCTION(BlueprintCallable, Category = "Movement")
-		void MoveRight(float Val);
-
 protected:
 	/**
 	* Called via input to turn at a given rate.
@@ -114,6 +106,12 @@ public:
 //==================================================================================================
 //Our Stuff
 //==================================================================================================
+public:
+	virtual void BeginPlay() override;
+
+	UPROPERTY(EditAnywhere)
+		float WalkSpeed;
+
 private:
 	void SetJumpPressed();
 	void SetJumpReleased();
@@ -123,15 +121,19 @@ private:
 	void SetReloadReleased();
 	void SetShieldPressed();
 	void SetShieldReleased();
+	void SetMoveForwardAxis(float val);
+	void SetMoveRightAxis(float val);
 public:
 	virtual void Tick(float DeltaSeconds) override;
 	virtual void Landed(const FHitResult& Hit) override;
 
 protected:
-	bool bJumpInput;
-	bool bFireInput;
-	bool bReloadInput;
-	bool bShieldInput;
+	bool bJumpAction;
+	bool bFireAction;
+	bool bReloadAction;
+	bool bShieldAction;
+	float MoveForwardAxis;
+	float MoveRightAxis;
 
 	/**Changes the current upper body state */
 	virtual void ChangeUpperState(class UUpperBodyState* newState);

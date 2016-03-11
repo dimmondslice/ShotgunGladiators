@@ -39,10 +39,7 @@ void UGladiatorState::TickComponent( float DeltaTime, ELevelTick TickType, FActo
 }
 
 void UGladiatorState::TickState(float DeltaTime){}
-void UGladiatorState::ProcessInput()
-{
-	InputComp = GetOwner()->FindComponentByClass<UInputComponent>();
-}
+void UGladiatorState::ProcessInput(float DeltaTime){}
 void UGladiatorState::OnBeginState(){}
 void UGladiatorState::OnStopState(){}
 void UGladiatorState::PauseState(){}
@@ -69,4 +66,10 @@ void UGladiatorState::ChangeLowerState(ULowerBodyState* newState)
 		Owner->CurrentLowerState = newState;
 		Owner->CurrentLowerState->OnBeginState();
 	}
+}
+
+void UGladiatorState::MoveDirection(float _xValue, float _yValue)
+{
+	Owner->AddMovementInput(Owner->GetActorForwardVector(), _xValue);
+	Owner->AddMovementInput(Owner->GetActorRightVector(), _yValue);
 }

@@ -7,10 +7,10 @@
 void ULandingState::TickState(float DeltaTime)
 {
 	TimeSinceStateStarted += DeltaTime;
-	if (TimeSinceStateStarted > .2f)
+	if (TimeSinceStateStarted > 3 * FPS60ToSeconds)
 		ChangeLowerState(Owner->Walking);
 }
 
-void ULandingState::ProcessInput()
+void ULandingState::ProcessInput(float DeltaTime)
 {
 }
