@@ -121,6 +121,8 @@ private:
 	void SetReloadReleased();
 	void SetShieldPressed();
 	void SetShieldReleased();
+	void SetDodgePressed();
+	void SetDodgeReleased();
 	void SetMoveForwardAxis(float val);
 	void SetMoveRightAxis(float val);
 public:
@@ -132,6 +134,7 @@ protected:
 	bool bFireAction;
 	bool bReloadAction;
 	bool bShieldAction;
+	bool bDodgeAction;
 	float MoveForwardAxis;
 	float MoveRightAxis;
 

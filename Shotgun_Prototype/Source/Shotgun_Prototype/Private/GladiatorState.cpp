@@ -6,7 +6,6 @@
 #include "LowerBodyState.h"
 #include "Gladiator.h"
 
-
 // Sets default values for this component's properties
 UGladiatorState::UGladiatorState()
 {
@@ -22,7 +21,6 @@ UGladiatorState::UGladiatorState()
 	//make sure you can use every state by default
 	bCanUse = true;
 }
-
 
 // Called when the game starts
 void UGladiatorState::BeginPlay()

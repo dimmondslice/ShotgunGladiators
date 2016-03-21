@@ -25,7 +25,6 @@ public:
 	// Called every frame
 	virtual void TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction ) override;
 
-
 	//OurStuff=====================================================================================
 	UPROPERTY(VisibleAnywhere)
 		bool bCanUse;
@@ -33,7 +32,6 @@ public:
 	class AGladiator* Owner;
 	//number of seconds that have passed since the state started
 	float TimeSinceStateStarted;
-
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//State Functions

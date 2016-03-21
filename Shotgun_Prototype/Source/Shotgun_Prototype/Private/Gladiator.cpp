@@ -79,6 +79,8 @@ AGladiator::AGladiator()
 
 	CurrentUpperState = Idle;
 	CurrentLowerState = Walking;
+
+	WalkSpeed = 10.f;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -97,6 +99,8 @@ void AGladiator::SetupPlayerInputComponent(class UInputComponent* InputComponent
 	InputComponent->BindAction("Reload", IE_Released, this, &AGladiator::SetReloadReleased);
 	InputComponent->BindAction("Shield", IE_Pressed, this, &AGladiator::SetShieldPressed);
 	InputComponent->BindAction("Shield", IE_Released, this, &AGladiator::SetShieldReleased);
+	InputComponent->BindAction("Dodge", IE_Pressed, this, &AGladiator::SetDodgePressed);
+	InputComponent->BindAction("Dodge", IE_Released, this, &AGladiator::SetDodgeReleased);
 
 	//InputComponent->BindTouch(EInputEvent::IE_Pressed, this, &AGladiator::TouchStarted);
 	if (EnableTouchscreenMovement(InputComponent) == false)
@@ -255,6 +259,8 @@ void AGladiator::SetReloadPressed() { bReloadAction = true; }
 void AGladiator::SetReloadReleased() { bReloadAction = false; }
 void AGladiator::SetShieldPressed() { bShieldAction = true; }
 void AGladiator::SetShieldReleased() { bShieldAction = false; }
+void AGladiator::SetDodgePressed() { bDodgeAction = true; }
+void AGladiator::SetDodgeReleased() { bDodgeAction = false; }
 void AGladiator::SetMoveForwardAxis(float val)
 {
 	MoveForwardAxis = val;
@@ -270,7 +276,7 @@ void AGladiator::Tick(float DeltaSeconds)
 	//update current states
 	CurrentUpperState->TickState(DeltaSeconds);
 	CurrentLowerState->TickState(DeltaSeconds);
-	//UE_LOG(LogTemp, Warning, CurrentLowerState->GetFullName());
+	//UE_LOG(LogTemp, Warning, TEXT(CurrentLowerState->GetName()));
 }
 
 void AGladiator::Landed(const FHitResult & Hit)
