@@ -14,46 +14,38 @@ UGladiatorState::UGladiatorState()
 	// off to improve performance if you don't need them.
 	bWantsBeginPlay = true;
 	PrimaryComponentTick.bCanEverTick = true;
+	bWantsInitializeComponent = true;
 
 	//grab reference to the owner of the actor component and cast it as a Gladiator*, save it to Owner Member variable
 	Owner = (AGladiator*)GetOwner();
+
+	//make sure you can use every state by default
+	bCanUse = true;
 }
 
 
 // Called when the game starts
 void UGladiatorState::BeginPlay()
 {
-	Super::BeginPlay();
-
-	// ...
-	
+	//make sure you can use every state by default
+	bCanUse = true;
 }
-
+void UGladiatorState::InitializeComponent(){}
 
 // Called every frame
 void UGladiatorState::TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction )
 {
 	Super::TickComponent( DeltaTime, TickType, ThisTickFunction );
-
-	// ...
 }
 
-void UGladiatorState::TickState(float DeltaTime)
+void UGladiatorState::TickState(float DeltaTime){}
+void UGladiatorState::ProcessInput()
 {
-	
+	InputComp = GetOwner()->FindComponentByClass<UInputComponent>();
 }
-
-void UGladiatorState::OnBeginState()
-{
-}
-
-void UGladiatorState::OnStopState()
-{
-}
-
-void UGladiatorState::PauseState()
-{
-}
+void UGladiatorState::OnBeginState(){}
+void UGladiatorState::OnStopState(){}
+void UGladiatorState::PauseState(){}
 
 void UGladiatorState::ChangeUpperState(UUpperBodyState* newState)
 {
@@ -61,6 +53,7 @@ void UGladiatorState::ChangeUpperState(UUpperBodyState* newState)
 	{
 		Owner->CurrentUpperState->OnStopState();
 		Owner->PreviousUpperState = Owner->CurrentUpperState;
+		Owner->PreviousUpperState->TimeSinceStateStarted = 0;
 		Owner->CurrentUpperState = newState;
 		Owner->CurrentUpperState->OnBeginState();
 	}
@@ -72,8 +65,8 @@ void UGladiatorState::ChangeLowerState(ULowerBodyState* newState)
 	{
 		Owner->CurrentLowerState->OnStopState();
 		Owner->PreviousLowerState = Owner->CurrentLowerState;
+		Owner->PreviousLowerState->TimeSinceStateStarted = 0;
 		Owner->CurrentLowerState = newState;
 		Owner->CurrentLowerState->OnBeginState();
 	}
 }
-

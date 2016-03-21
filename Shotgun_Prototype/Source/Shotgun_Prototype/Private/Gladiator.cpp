@@ -89,8 +89,14 @@ void AGladiator::SetupPlayerInputComponent(class UInputComponent* InputComponent
 	// set up gameplay key bindings
 	check(InputComponent);
 
-	InputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
-	InputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
+	InputComponent->BindAction("Jump", IE_Pressed, this, &AGladiator::SetJumpPressed); // &ACharacter::Jump);
+	InputComponent->BindAction("Jump", IE_Released, this, &AGladiator::SetJumpReleased);// &ACharacter::StopJumping);
+	InputComponent->BindAction("Fire", IE_Pressed, this, &AGladiator::SetFirePressed);
+	InputComponent->BindAction("Fire", IE_Released, this, &AGladiator::SetFireReleased);
+	InputComponent->BindAction("Reload", IE_Pressed, this, &AGladiator::SetReloadPressed);
+	InputComponent->BindAction("Reload", IE_Released, this, &AGladiator::SetReloadReleased);
+	InputComponent->BindAction("Shield", IE_Pressed, this, &AGladiator::SetShieldPressed);
+	InputComponent->BindAction("Shield", IE_Released, this, &AGladiator::SetShieldReleased);
 
 	//InputComponent->BindTouch(EInputEvent::IE_Pressed, this, &AGladiator::TouchStarted);
 	if (EnableTouchscreenMovement(InputComponent) == false)
@@ -100,6 +106,8 @@ void AGladiator::SetupPlayerInputComponent(class UInputComponent* InputComponent
 
 	//InputComponent->BindAxis("MoveForward", this, &AGladiator::MoveForward);
 	//InputComponent->BindAxis("MoveRight", this, &AGladiator::MoveRight);
+	InputComponent->BindAxis("MoveForward");
+	InputComponent->BindAxis("MoveRight");
 
 	// We have 2 versions of the rotation bindings to handle different kinds of devices differently
 	// "turn" handles devices that provide an absolute delta, such as a mouse.
@@ -249,11 +257,27 @@ bool AGladiator::EnableTouchscreenMovement(class UInputComponent* InputComponent
 	return bResult;
 }
 
+//I can't believe I have to have my own bool setting input events.
+void AGladiator::SetJumpPressed() { bJumpInput = true; }
+void AGladiator::SetJumpReleased() { bJumpInput = false; }
+void AGladiator::SetFirePressed() { bFireInput = true; }
+void AGladiator::SetFireReleased() { bFireInput = false; }
+void AGladiator::SetReloadPressed() { bReloadInput = true; }
+void AGladiator::SetReloadReleased() { bReloadInput = false; }
+void AGladiator::SetShieldPressed() { bShieldInput = true; }
+void AGladiator::SetShieldReleased() { bShieldInput = false; }
+
 void AGladiator::Tick(float DeltaSeconds)
 {
 	//update current states
 	CurrentUpperState->TickState(DeltaSeconds);
 	CurrentLowerState->TickState(DeltaSeconds);
+	//UE_LOG(LogTemp, Warning, CurrentLowerState->GetFullName());
+}
+
+void AGladiator::Landed(const FHitResult & Hit)
+{
+	CurrentLowerState->ChangeLowerState(Landing);
 }
 
 void AGladiator::ChangeUpperState(UUpperBodyState* newState)

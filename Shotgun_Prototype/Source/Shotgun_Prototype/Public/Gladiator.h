@@ -11,6 +11,7 @@ class SHOTGUN_PROTOTYPE_API AGladiator : public ACharacter
 	GENERATED_BODY()
 
 	friend class UGladiatorState;
+	friend class UWalkingState;
 
 		/** Pawn mesh: 1st person view (arms; seen only by self) */
 		UPROPERTY(VisibleDefaultsOnly, Category = Mesh)
@@ -113,23 +114,30 @@ public:
 //==================================================================================================
 //Our Stuff
 //==================================================================================================
+private:
+	void SetJumpPressed();
+	void SetJumpReleased();
+	void SetFirePressed();
+	void SetFireReleased();
+	void SetReloadPressed();
+	void SetReloadReleased();
+	void SetShieldPressed();
+	void SetShieldReleased();
 public:
 	virtual void Tick(float DeltaSeconds) override;
+	virtual void Landed(const FHitResult& Hit) override;
 
 protected:
-	
-	//Current states for the gladiators upper and lower bodies
-    class UUpperBodyState* CurrentUpperState;
-	class ULowerBodyState* CurrentLowerState;
-	//These hold the previous state for each half of the body
-	UUpperBodyState* PreviousUpperState;
-	ULowerBodyState* PreviousLowerState;
+	bool bJumpInput;
+	bool bFireInput;
+	bool bReloadInput;
+	bool bShieldInput;
 
 	/**Changes the current upper body state */
-	virtual void ChangeUpperState(UUpperBodyState* newState);
+	virtual void ChangeUpperState(class UUpperBodyState* newState);
 	/**Changes the current lower body state */
-	virtual void ChangeLowerState(ULowerBodyState* newState);
-	
+	virtual void ChangeLowerState(class ULowerBodyState* newState);
+public:	
 	//references to every state this gladiator has attached to it
 	UPROPERTY(VisibleAnywhere)
 	class UIdleState* Idle;
@@ -145,6 +153,7 @@ protected:
 	class UHoldingShieldState* HoldingShield;
 	UPROPERTY(VisibleAnywhere)
 	class UShieldBashState* ShieldBash;
+
 	//lower body
 	UPROPERTY(VisibleAnywhere)
 	class UWalkingState* Walking;
@@ -156,4 +165,15 @@ protected:
 	class UFallingState* Falling;
 	UPROPERTY(VisibleAnywhere)
 	class ULandingState* Landing;
+
+	//Current states for the gladiators upper and lower bodies
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
+	class UUpperBodyState* CurrentUpperState;
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
+	class ULowerBodyState* CurrentLowerState;
+	//These hold the previous state for each half of the body
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
+	class UUpperBodyState* PreviousUpperState;
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
+	class ULowerBodyState* PreviousLowerState;
 };

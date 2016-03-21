@@ -13,7 +13,6 @@ class SHOTGUN_PROTOTYPE_API ULandingState : public UFallingState
 {
 	GENERATED_BODY()
 	
-	
-	
-	
+	virtual void TickState(float DeltaTime) override;
+	virtual void ProcessInput() override;
 };
