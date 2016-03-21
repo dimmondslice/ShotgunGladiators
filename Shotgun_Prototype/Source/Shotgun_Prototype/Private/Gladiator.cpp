@@ -273,7 +273,9 @@ void AGladiator::SetMoveRightAxis(float val)
 
 void AGladiator::Tick(float DeltaSeconds)
 {
-	//update current states
+    Super::Tick(DeltaSeconds);
+    
+    //update current states
 	CurrentUpperState->TickState(DeltaSeconds);
 	CurrentLowerState->TickState(DeltaSeconds);
 	//UE_LOG(LogTemp, Warning, TEXT(CurrentLowerState->GetName()));
