@@ -25,17 +25,13 @@ public:
 	// Called every frame
 	virtual void TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction ) override;
 
-
 	//OurStuff=====================================================================================
 	UPROPERTY(VisibleAnywhere)
 		bool bCanUse;
 	//reference to this actor components actor, cast as a Gladiator
 	class AGladiator* Owner;
-	//reference to this actor's InputComponent
-	class UInputComponent* InputComp;
 	//number of seconds that have passed since the state started
 	float TimeSinceStateStarted;
-
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//State Functions
@@ -45,7 +41,7 @@ public:
 	/**Called every frame from Gladiator tick. Check for input here*/
 	UFUNCTION(BlueprintCallable, category = "GladiatorState")
 	/**Called every frame the state is active, any state logic related to input should be done here*/
-	virtual void ProcessInput();
+	virtual void ProcessInput(float DeltaTime);
 	/**Called when the gladiators State changes to this state*/
 	virtual void OnBeginState();
 	/**Called when the gladiators state changes off of this state*/
@@ -61,4 +57,7 @@ public:
 	*/
 	virtual void ChangeLowerState(class ULowerBodyState* newState);
 
+	float FPS60ToSeconds = 0.0166667f;
+
+	void MoveDirection(float _xValue, float _yValue);
 };

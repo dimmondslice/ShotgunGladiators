@@ -8,6 +8,6 @@ void UFallingState::TickState(float DeltaTime)
 	
 }
 
-void UFallingState::ProcessInput()
+void UFallingState::ProcessInput(float DeltaTime)
 {
 }

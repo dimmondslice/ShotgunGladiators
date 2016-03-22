@@ -14,8 +14,6 @@ class SHOTGUN_PROTOTYPE_API UJumpCrouchState : public ULowerBodyState
 	GENERATED_BODY()
 	
 	virtual void TickState(float DeltaTime) override;
-	virtual void ProcessInput() override;
+	virtual void ProcessInput(float DeltaTime) override;
 	virtual void OnBeginState() override;
-	
-	
 };
