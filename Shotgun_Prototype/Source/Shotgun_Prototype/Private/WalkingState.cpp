@@ -12,11 +12,10 @@ void UWalkingState::TickState(float DeltaTime)
 
 void UWalkingState::ProcessInput(float DeltaTime)
 {
-	Super::ProcessInput(DeltaTime);
+	Super::ProcessInput(DeltaTime); 
 	
 	float xSpeed = Owner->MoveForwardAxis * 30.0f;
 	float ySpeed = Owner->MoveRightAxis * 30.0f;
-	UE_LOG(LogTemp, Warning, TEXT("xSpeed: %f"), xSpeed);
 	MoveDirection(xSpeed, ySpeed);
 
 	if (Owner->bJumpAction)

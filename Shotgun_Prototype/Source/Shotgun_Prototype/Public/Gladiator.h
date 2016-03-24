@@ -12,6 +12,7 @@ class SHOTGUN_PROTOTYPE_API AGladiator : public ACharacter
 
 	friend class UGladiatorState;
 	friend class UWalkingState;
+	friend class UDodgeState;
 
 		/** Pawn mesh: 1st person view (arms; seen only by self) */
 		UPROPERTY(VisibleDefaultsOnly, Category = Mesh)
@@ -129,6 +130,11 @@ public:
 	virtual void Tick(float DeltaSeconds) override;
 	virtual void Landed(const FHitResult& Hit) override;
 
+	UFUNCTION(Server, Reliable, WithValidation)
+	void LaunchCharacter_Server(FVector LaunchVelocity, bool bXYOverride, bool bZOverride);
+	//virtual void MyDodgeDirection_Implementation();
+
+
 protected:
 	bool bJumpAction;
 	bool bFireAction;
@@ -137,6 +143,7 @@ protected:
 	bool bDodgeAction;
 	float MoveForwardAxis;
 	float MoveRightAxis;
+	FVector MoveAxes;
 
 	/**Changes the current upper body state */
 	virtual void ChangeUpperState(class UUpperBodyState* newState);
@@ -162,7 +169,7 @@ public:
 	//lower body
 	UPROPERTY(VisibleAnywhere)
 	class UWalkingState* Walking;
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
 	class UDodgeState* Dodge;
 	UPROPERTY(VisibleAnywhere)
 	class UJumpCrouchState* JumpCrouch;

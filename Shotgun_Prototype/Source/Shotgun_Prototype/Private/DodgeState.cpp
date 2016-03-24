@@ -2,6 +2,12 @@
 
 #include "Shotgun_Prototype.h"
 #include "DodgeState.h"
+#include "walkingState.h"
+
+UDodgeState::UDodgeState()
+{
+	CurrentRechargeTimer = RechargeTime;
+}
 
 void UDodgeState::TickState(float DeltaTime)
 {
@@ -13,11 +19,38 @@ void UDodgeState::ProcessInput(float DeltaTime)
 
 void UDodgeState::OnBeginState()
 {
-	UE_LOG(LogTemp, Warning, TEXT("begin state dodge"));
-	MoveDirection(100000.f, 100000.f);
+	//decrement number of times you can use the charge
+	CurrentChargesRemaining-=1;
 
-	if (Owner->GetRootComponent()->IsSimulatingPhysics())
+	//create dodge direction by adding your forward vector and right vector Multiplied by your stick direction
+	FVector LaunchDir = Owner->GetActorForwardVector() * Owner->MoveForwardAxis +
+		Owner->GetActorRightVector() * Owner->MoveRightAxis;
+	if (LaunchDir.IsNearlyZero())
+		LaunchDir = Owner->GetActorForwardVector();
+	LaunchDir *= DodgeForce;
+	LaunchDir.Z = PopForce;		//add a little bit of upward force to"pop" the character up a little
+	Owner->LaunchCharacter_Server(LaunchDir, false, false);
+}
+
+void UDodgeState::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction * ThisTickFunction)
+{
+	CurrentRechargeTimer -= DeltaTime;
+	//if the recharge timer hits zero, add a new charge, and reset the timer
+	if (CurrentRechargeTimer <= 0.0f)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("heyyoo"));
+		if (CurrentChargesRemaining < MaxNumOfCharges)
+			CurrentChargesRemaining++;
+		CurrentRechargeTimer = RechargeTime;
 	}
+
+	//update the ability to use this state
+	if (CurrentChargesRemaining <= 0)
+	{
+		bCanUse = false;
+	}
+	else
+	{
+		bCanUse = true;
+	}
+	//UE_LOG(LogTemp, Warning, TEXT("current charges remaining %i"), CurrentChargesRemaining);
 }
