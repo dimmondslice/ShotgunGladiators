@@ -14,7 +14,7 @@ void UJumpCrouchState::TickState(float DeltaTime)
 
 }
 
-void UJumpCrouchState::ProcessInput()
+void UJumpCrouchState::ProcessInput(float DeltaTime)
 {
 }
 

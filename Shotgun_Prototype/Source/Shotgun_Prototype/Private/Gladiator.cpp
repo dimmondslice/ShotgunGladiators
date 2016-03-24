@@ -79,6 +79,8 @@ AGladiator::AGladiator()
 
 	CurrentUpperState = Idle;
 	CurrentLowerState = Walking;
+
+	WalkSpeed = 10.f;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -97,6 +99,8 @@ void AGladiator::SetupPlayerInputComponent(class UInputComponent* InputComponent
 	InputComponent->BindAction("Reload", IE_Released, this, &AGladiator::SetReloadReleased);
 	InputComponent->BindAction("Shield", IE_Pressed, this, &AGladiator::SetShieldPressed);
 	InputComponent->BindAction("Shield", IE_Released, this, &AGladiator::SetShieldReleased);
+	InputComponent->BindAction("Dodge", IE_Pressed, this, &AGladiator::SetDodgePressed);
+	InputComponent->BindAction("Dodge", IE_Released, this, &AGladiator::SetDodgeReleased);
 
 	//InputComponent->BindTouch(EInputEvent::IE_Pressed, this, &AGladiator::TouchStarted);
 	if (EnableTouchscreenMovement(InputComponent) == false)
@@ -106,8 +110,8 @@ void AGladiator::SetupPlayerInputComponent(class UInputComponent* InputComponent
 
 	//InputComponent->BindAxis("MoveForward", this, &AGladiator::MoveForward);
 	//InputComponent->BindAxis("MoveRight", this, &AGladiator::MoveRight);
-	InputComponent->BindAxis("MoveForward");
-	InputComponent->BindAxis("MoveRight");
+	InputComponent->BindAxis("MoveForward", this, &AGladiator::SetMoveForwardAxis);
+	InputComponent->BindAxis("MoveRight", this, &AGladiator::SetMoveRightAxis);
 
 	// We have 2 versions of the rotation bindings to handle different kinds of devices differently
 	// "turn" handles devices that provide an absolute delta, such as a mouse.
@@ -214,24 +218,6 @@ void AGladiator::TouchUpdate(const ETouchIndex::Type FingerIndex, const FVector 
 	}
 }
 
-void AGladiator::MoveForward(float Value)
-{
-	if (Value != 0.0f)
-	{
-		// add movement in that direction
-		AddMovementInput(GetActorForwardVector(), Value);
-	}
-}
-
-void AGladiator::MoveRight(float Value)
-{
-	if (Value != 0.0f)
-	{
-		// add movement in that direction
-		AddMovementInput(GetActorRightVector(), Value);
-	}
-}
-
 void AGladiator::TurnAtRate(float Rate)
 {
 	// calculate delta for this frame from the rate information
@@ -257,22 +243,42 @@ bool AGladiator::EnableTouchscreenMovement(class UInputComponent* InputComponent
 	return bResult;
 }
 
+void AGladiator::BeginPlay()
+{
+	Super::BeginPlay();
+	CurrentUpperState = Idle;
+	CurrentLowerState = Walking;
+}
+
 //I can't believe I have to have my own bool setting input events.
-void AGladiator::SetJumpPressed() { bJumpInput = true; }
-void AGladiator::SetJumpReleased() { bJumpInput = false; }
-void AGladiator::SetFirePressed() { bFireInput = true; }
-void AGladiator::SetFireReleased() { bFireInput = false; }
-void AGladiator::SetReloadPressed() { bReloadInput = true; }
-void AGladiator::SetReloadReleased() { bReloadInput = false; }
-void AGladiator::SetShieldPressed() { bShieldInput = true; }
-void AGladiator::SetShieldReleased() { bShieldInput = false; }
+void AGladiator::SetJumpPressed() { bJumpAction = true; }
+void AGladiator::SetJumpReleased() { bJumpAction = false; }
+void AGladiator::SetFirePressed() { bFireAction = true; }
+void AGladiator::SetFireReleased() { bFireAction = false; }
+void AGladiator::SetReloadPressed() { bReloadAction = true; }
+void AGladiator::SetReloadReleased() { bReloadAction = false; }
+void AGladiator::SetShieldPressed() { bShieldAction = true; }
+void AGladiator::SetShieldReleased() { bShieldAction = false; }
+void AGladiator::SetDodgePressed() { bDodgeAction = true; }
+void AGladiator::SetDodgeReleased() { bDodgeAction = false; }
+void AGladiator::SetMoveForwardAxis(float val)
+{
+	MoveForwardAxis = val;
+}
+
+void AGladiator::SetMoveRightAxis(float val)
+{
+	MoveRightAxis = val;
+}
 
 void AGladiator::Tick(float DeltaSeconds)
 {
-	//update current states
+    Super::Tick(DeltaSeconds);
+    
+    //update current states
 	CurrentUpperState->TickState(DeltaSeconds);
 	CurrentLowerState->TickState(DeltaSeconds);
-	//UE_LOG(LogTemp, Warning, CurrentLowerState->GetFullName());
+	//UE_LOG(LogTemp, Warning, TEXT(CurrentLowerState->GetName()));
 }
 
 void AGladiator::Landed(const FHitResult & Hit)
