@@ -30,6 +30,9 @@ void UDodgeState::OnBeginState()
 	LaunchDir *= DodgeForce;
 	LaunchDir.Z = PopForce;		//add a little bit of upward force to"pop" the character up a little
 	Owner->LaunchCharacter_Server(LaunchDir, false, false);
+
+    //BeginDodgeEvent();
+    BeginDodgeEvent.Broadcast();
 }
 
 void UDodgeState::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction * ThisTickFunction)
@@ -52,5 +55,5 @@ void UDodgeState::TickComponent(float DeltaTime, ELevelTick TickType, FActorComp
 	{
 		bCanUse = true;
 	}
-	//UE_LOG(LogTemp, Warning, TEXT("current charges remaining %i"), CurrentChargesRemaining);
+	UE_LOG(LogTemp, Warning, TEXT("current charges remaining %i"), CurrentChargesRemaining);
 }

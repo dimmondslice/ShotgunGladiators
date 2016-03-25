@@ -32,6 +32,11 @@ private:
 	float CurrentRechargeTimer;
 
 public:
+    
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE(FBeginDodgeEventDelegate);
+    UPROPERTY(BlueprintAssignable, Category = "Gladiator")
+    FBeginDodgeEventDelegate BeginDodgeEvent;
+    
 
 	virtual void TickState(float DeltaTime) override;
 	virtual void ProcessInput(float DeltaTime) override;
