@@ -112,6 +112,8 @@ public:
 
 	UPROPERTY(EditAnywhere)
 		float WalkSpeed;
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		
 
 private:
 	void SetJumpPressed();
