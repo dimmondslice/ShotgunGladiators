@@ -60,5 +60,5 @@ void UDodgeState::TickComponent(float DeltaTime, ELevelTick TickType, FActorComp
 			CurrentChargesRemaining++;
 		CurrentRechargeTimer = RechargeTime;
 	}
-	UE_LOG(LogTemp, Warning, TEXT("current charges remaining %i"), CurrentChargesRemaining);
+	//UE_LOG(LogTemp, Warning, TEXT("current charges remaining %i"), CurrentChargesRemaining);
 }
