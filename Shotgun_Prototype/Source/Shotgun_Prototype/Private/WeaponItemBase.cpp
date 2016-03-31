@@ -16,5 +16,29 @@ void AWeaponItemBase::BeginPlay() {
 void AWeaponItemBase::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
+    
+    this->Fire();
+    //this->Fire_Implementation();
+    //UE_LOG(LogTemp, Error, TEXT("yo fire c++"));
+
 }
 
+/*
+void AWeaponItemBase::Reload() {
+
+}
+*/
+
+void AWeaponItemBase::Reload_Implementation() {
+
+}
+
+/*
+void AWeaponItemBase::Fire() {
+
+}
+*/
+
+void AWeaponItemBase::Fire_Implementation() {
+    UE_LOG(LogTemp, Error, TEXT("yo fire c++"));
+}

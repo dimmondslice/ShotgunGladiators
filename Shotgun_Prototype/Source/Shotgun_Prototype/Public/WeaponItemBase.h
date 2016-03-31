@@ -8,14 +8,23 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(Blueprintable)
 class SHOTGUN_PROTOTYPE_API AWeaponItemBase : public AItemBase
 {
     GENERATED_BODY()
+
+public:
 
     AWeaponItemBase();
 
     virtual void BeginPlay() override;
 	
     virtual void Tick(float DeltaSeconds) override;
+
+    UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Weapon Item")
+    void Reload();
+
+    UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Weapon Item")
+    void Fire();
+    
 };

@@ -5,7 +5,7 @@
 #include "GameFramework/Actor.h"
 #include "ItemBase.generated.h"
 
-UCLASS()
+UCLASS(Blueprintable)
 class SHOTGUN_PROTOTYPE_API AItemBase : public AActor
 {
 	GENERATED_BODY()
