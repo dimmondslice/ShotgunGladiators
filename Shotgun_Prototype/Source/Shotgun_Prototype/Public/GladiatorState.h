@@ -25,9 +25,15 @@ public:
 	// Called every frame
 	virtual void TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction ) override;
 
+protected:
 	//OurStuff=====================================================================================
 	UPROPERTY(VisibleAnywhere)
 		bool bCanUse;
+public:
+	UFUNCTION(BlueprintCallable, category = "GladiatorState")
+		virtual bool Get_bCanUse();
+
+
 	//reference to this actor components actor, cast as a Gladiator
 	class AGladiator* Owner;
 	//number of seconds that have passed since the state started

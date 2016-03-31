@@ -41,6 +41,7 @@ public:
 	virtual void TickState(float DeltaTime) override;
 	virtual void ProcessInput(float DeltaTime) override;
 	virtual void OnBeginState() override;
+	virtual bool Get_bCanUse() override;
 
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 

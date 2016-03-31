@@ -35,6 +35,21 @@ void UDodgeState::OnBeginState()
     BeginDodgeEvent.Broadcast();
 }
 
+bool UDodgeState::Get_bCanUse()
+{
+	//update the ability to use this state
+	if (CurrentChargesRemaining <= 0)
+	{
+		bCanUse = false;
+		return bCanUse;
+	}
+	else
+	{
+		bCanUse = true;
+		return bCanUse;
+	}
+}
+
 void UDodgeState::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction * ThisTickFunction)
 {
 	CurrentRechargeTimer -= DeltaTime;
@@ -45,15 +60,5 @@ void UDodgeState::TickComponent(float DeltaTime, ELevelTick TickType, FActorComp
 			CurrentChargesRemaining++;
 		CurrentRechargeTimer = RechargeTime;
 	}
-
-	//update the ability to use this state
-	if (CurrentChargesRemaining <= 0)
-	{
-		bCanUse = false;
-	}
-	else
-	{
-		bCanUse = true;
-	}
-	UE_LOG(LogTemp, Warning, TEXT("current charges remaining %i"), CurrentChargesRemaining);
+	//UE_LOG(LogTemp, Warning, TEXT("current charges remaining %i"), CurrentChargesRemaining);
 }

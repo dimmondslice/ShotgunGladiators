@@ -36,6 +36,11 @@ void UGladiatorState::TickComponent( float DeltaTime, ELevelTick TickType, FActo
 	Super::TickComponent( DeltaTime, TickType, ThisTickFunction );
 }
 
+bool UGladiatorState::Get_bCanUse()
+{
+	return bCanUse;
+}
+
 void UGladiatorState::TickState(float DeltaTime){}
 void UGladiatorState::ProcessInput(float DeltaTime){}
 void UGladiatorState::OnBeginState(){}
@@ -44,7 +49,7 @@ void UGladiatorState::PauseState(){}
 
 void UGladiatorState::ChangeUpperState(UUpperBodyState* newState)
 {
-	if (newState->bCanUse)
+	if (newState->Get_bCanUse())
 	{
 		Owner->CurrentUpperState->OnStopState();
 		Owner->PreviousUpperState = Owner->CurrentUpperState;
@@ -56,7 +61,7 @@ void UGladiatorState::ChangeUpperState(UUpperBodyState* newState)
 
 void UGladiatorState::ChangeLowerState(ULowerBodyState* newState)
 {
-	if (newState->bCanUse)
+	if (newState->Get_bCanUse())
 	{
 		Owner->CurrentLowerState->OnStopState();
 		Owner->PreviousLowerState = Owner->CurrentLowerState;
