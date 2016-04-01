@@ -13,6 +13,7 @@ class SHOTGUN_PROTOTYPE_API AGladiator : public ACharacter
 	friend class UGladiatorState;
 	friend class UWalkingState;
 	friend class UDodgeState;
+	friend class UFallingState;
 
 		/** Pawn mesh: 1st person view (arms; seen only by self) */
 		UPROPERTY(VisibleDefaultsOnly, Category = Mesh)
