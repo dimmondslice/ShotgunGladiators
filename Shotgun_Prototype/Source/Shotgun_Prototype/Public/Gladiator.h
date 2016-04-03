@@ -112,9 +112,9 @@ public:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(EditAnywhere)
-		float WalkSpeed;
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		
+	float WalkSpeed;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class AWeaponItemBase* HeldWeapon;
 
 private:
 	void SetJumpPressed();
@@ -135,7 +135,7 @@ public:
 
 	UFUNCTION(Server, Reliable, WithValidation)
 	void LaunchCharacter_Server(FVector LaunchVelocity, bool bXYOverride, bool bZOverride);
-	//virtual void MyDodgeDirection_Implementation();
+
 
 
 protected:
