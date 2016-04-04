@@ -7,7 +7,7 @@
 void ULandingState::TickState(float DeltaTime)
 {
 	TimeSinceStateStarted += DeltaTime;
-	if (TimeSinceStateStarted > 3 * FPS60ToSeconds)
+	if (TimeSinceStateStarted > 4 * FPS60ToSeconds)
 		ChangeLowerState(Owner->Walking);
 }
 
