@@ -12,8 +12,7 @@ UCLASS()
 class SHOTGUN_PROTOTYPE_API URaiseShieldState : public UUpperBodyState
 {
 	GENERATED_BODY()
-	
-	
-	
+
+		virtual void OnBeginState() override;
 	
 };
