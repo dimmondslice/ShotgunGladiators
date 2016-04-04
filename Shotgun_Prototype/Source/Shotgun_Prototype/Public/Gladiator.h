@@ -115,6 +115,8 @@ public:
 	float WalkSpeed;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class AWeaponItemBase* HeldWeapon;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class AShieldItemBase* HeldShield;
 
 private:
 	void SetJumpPressed();

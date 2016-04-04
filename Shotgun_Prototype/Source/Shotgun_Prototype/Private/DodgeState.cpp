@@ -30,7 +30,7 @@ void UDodgeState::OnBeginState()
 void UDodgeState::TickState(float DeltaTime)
 {
 	TimeSinceStateStarted += DeltaTime;
-	if (TimeSinceStateStarted > 5 * FPS60ToSeconds)
+	if (TimeSinceStateStarted > 6 * FPS60ToSeconds)
 	{
 		ExecuteDodge();
 		ChangeLowerState(Owner->Falling);

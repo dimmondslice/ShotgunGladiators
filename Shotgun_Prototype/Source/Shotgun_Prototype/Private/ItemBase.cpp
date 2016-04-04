@@ -2,7 +2,11 @@
 
 #include "Shotgun_Prototype.h"
 #include "ItemBase.h"
+/*
+#include "UnrealNetwork.h"
 
+#include "Engine.h"
+*/
 
 // Sets default values
 AItemBase::AItemBase()
@@ -11,6 +15,13 @@ AItemBase::AItemBase()
 	PrimaryActorTick.bCanEverTick = true;
 
 }
+
+/*
+void AItemBase::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> & OutLifetimeProps) const
+{
+    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+}
+*/
 
 // Called when the game starts or when spawned
 void AItemBase::BeginPlay()

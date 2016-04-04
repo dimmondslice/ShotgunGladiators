@@ -21,6 +21,8 @@
 #include "FallingState.h"
 #include "LandingState.h"
 
+#include "ShieldItemBase.h"
+
 DEFINE_LOG_CATEGORY_STATIC(LogFPChar, Warning, All);
 
 //////////////////////////////////////////////////////////////////////////
@@ -248,6 +250,10 @@ void AGladiator::BeginPlay()
 	Super::BeginPlay();
 	CurrentUpperState = Idle;
 	CurrentLowerState = Walking;
+
+	FActorSpawnParameters param;
+	//param.
+	//HeldShield = GetWorld()->SpawnActor<AShieldItemBase>()
 }
 
 //I can't believe I have to have my own bool setting input events.

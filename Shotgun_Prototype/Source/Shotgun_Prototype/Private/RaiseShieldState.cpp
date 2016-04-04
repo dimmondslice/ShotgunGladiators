@@ -3,6 +3,7 @@
 #include "Shotgun_Prototype.h"
 #include "RaiseShieldState.h"
 
-
-
-
+void URaiseShieldState::OnBeginState()
+{
+	
+}

@@ -1,13 +1,28 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+
 #include "Shotgun_Prototype.h"
 #include "WeaponItemBase.h"
+//#include "Engine.h"
+
+//#include "UnrealNetwork.h"
 
 
 AWeaponItemBase::AWeaponItemBase()
 {
     PrimaryActorTick.bCanEverTick = true;
+
+    bReplicates = true;
 }
+
+/*
+void AWeaponItemBase::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> & OutLifetimeProps) const
+{
+    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+    DOREPLIFETIME(AWeaponItemBase, maxAmmo);
+}
+*/
 
 void AWeaponItemBase::BeginPlay() {
     Super::BeginPlay();
