@@ -3,6 +3,10 @@
 #include "Shotgun_Prototype.h"
 #include "LowerShieldState.h"
 
-
-
-
+void ULowerShieldState::OnBeginState()
+{
+	DestroyShieldEvent.Broadcast();
+}
+void ULowerShieldState::TickState(float DeltaTime)
+{
+}

@@ -90,6 +90,7 @@ AGladiator::AGladiator()
 
 void AGladiator::SetupPlayerInputComponent(class UInputComponent* InputComponent)
 {
+	Super::SetupPlayerInputComponent(InputComponent);
 	// set up gameplay key bindings
 	check(InputComponent);
 
@@ -287,6 +288,10 @@ void AGladiator::Tick(float DeltaSeconds)
 	CurrentUpperState->TickState(DeltaSeconds);
 	CurrentLowerState->TickState(DeltaSeconds);
 	//UE_LOG(LogTemp, Warning, TEXT(CurrentLowerState->GetName()));
+	if (bShieldAction)
+	{
+		
+	}
 }
 
 void AGladiator::Landed(const FHitResult & Hit)

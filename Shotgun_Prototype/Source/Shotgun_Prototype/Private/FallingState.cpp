@@ -10,4 +10,7 @@ void UFallingState::TickState(float DeltaTime)
 
 void UFallingState::ProcessInput(float DeltaTime)
 {
+	float xSpeed = Owner->MoveForwardAxis;
+	float ySpeed = Owner->MoveRightAxis;
+	MoveDirection(xSpeed, ySpeed);
 }
