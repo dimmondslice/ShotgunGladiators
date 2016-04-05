@@ -21,6 +21,8 @@
 #include "FallingState.h"
 #include "LandingState.h"
 
+#include "ShieldItemBase.h"
+
 DEFINE_LOG_CATEGORY_STATIC(LogFPChar, Warning, All);
 
 //////////////////////////////////////////////////////////////////////////
@@ -88,6 +90,7 @@ AGladiator::AGladiator()
 
 void AGladiator::SetupPlayerInputComponent(class UInputComponent* InputComponent)
 {
+	Super::SetupPlayerInputComponent(InputComponent);
 	// set up gameplay key bindings
 	check(InputComponent);
 
@@ -248,6 +251,10 @@ void AGladiator::BeginPlay()
 	Super::BeginPlay();
 	CurrentUpperState = Idle;
 	CurrentLowerState = Walking;
+
+	FActorSpawnParameters param;
+	//param.
+	//HeldShield = GetWorld()->SpawnActor<AShieldItemBase>()
 }
 
 //I can't believe I have to have my own bool setting input events.
@@ -281,6 +288,10 @@ void AGladiator::Tick(float DeltaSeconds)
 	CurrentUpperState->TickState(DeltaSeconds);
 	CurrentLowerState->TickState(DeltaSeconds);
 	//UE_LOG(LogTemp, Warning, TEXT(CurrentLowerState->GetName()));
+	if (bShieldAction)
+	{
+		
+	}
 }
 
 void AGladiator::Landed(const FHitResult & Hit)

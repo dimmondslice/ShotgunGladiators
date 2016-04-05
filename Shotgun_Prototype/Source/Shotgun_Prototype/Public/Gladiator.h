@@ -11,9 +11,20 @@ class SHOTGUN_PROTOTYPE_API AGladiator : public ACharacter
 	GENERATED_BODY()
 
 	friend class UGladiatorState;
+
+	friend class UIdleState;
+	friend class UShootingState;
+	friend class UReloadingState;
+	friend class URaiseShieldState;
+	friend class ULowerShieldState;
+	friend class UHoldingShieldState;
+	friend class UShieldBashState;
+	
 	friend class UWalkingState;
 	friend class UDodgeState;
+	friend class UJumpCrouchState;
 	friend class UFallingState;
+	friend class ULandingState;
 
 		/** Pawn mesh: 1st person view (arms; seen only by self) */
 		UPROPERTY(VisibleDefaultsOnly, Category = Mesh)
@@ -115,6 +126,8 @@ public:
 	float WalkSpeed;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class AWeaponItemBase* HeldWeapon;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class AShieldItemBase* HeldShield;
 
 private:
 	void SetJumpPressed();

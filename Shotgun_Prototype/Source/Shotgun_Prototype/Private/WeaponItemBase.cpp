@@ -73,5 +73,5 @@ void AWeaponItemBase::Fire() {
 */
 
 void AWeaponItemBase::Fire_Implementation() {
-    UE_LOG(LogTemp, Error, TEXT("yo fire c++"));
+    //UE_LOG(LogTemp, Error, TEXT("yo fire c++"));
 }
