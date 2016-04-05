@@ -33,7 +33,7 @@ void UDodgeState::TickState(float DeltaTime)
 	if (TimeSinceStateStarted > 6 * FPS60ToSeconds)
 	{
 		ExecuteDodge();
-		ChangeLowerState(Owner->Falling);
+		ChangeLowerState(Glad->Falling);
 	}
 }
 
@@ -47,13 +47,13 @@ void UDodgeState::ExecuteDodge()
 	CurrentChargesRemaining -= 1;
 
 	//create dodge direction by adding your forward vector and right vector Multiplied by your stick direction
-	FVector LaunchDir = Owner->GetActorForwardVector() * Owner->MoveForwardAxis +
-		Owner->GetActorRightVector() * Owner->MoveRightAxis;
+	FVector LaunchDir = Glad->GetActorForwardVector() * Glad->MoveForwardAxis +
+		Glad->GetActorRightVector() * Glad->MoveRightAxis;
 	if (LaunchDir.IsNearlyZero())
-		LaunchDir = Owner->GetActorForwardVector();
+		LaunchDir = Glad->GetActorForwardVector();
 	LaunchDir *= DodgeForce;
 	LaunchDir.Z = PopForce;		//add a little bit of upward force to"pop" the character up a little
-	Owner->LaunchCharacter_Server(LaunchDir, false, false);
+	Glad->LaunchCharacter_Server(LaunchDir, false, false);
 
 	//BeginDodgeEvent();
 	BeginDodgeEvent.Broadcast();

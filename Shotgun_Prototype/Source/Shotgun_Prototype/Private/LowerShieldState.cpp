@@ -13,7 +13,7 @@ void ULowerShieldState::TickState(float DeltaTime)
 	if (TimeSinceStateStarted >= 11 * FPS60ToSeconds)
 	{
 		DestroyShieldEvent.Broadcast();
-		ChangeUpperState(Owner->Idle);
+		ChangeUpperState(Glad->Idle);
 	}
 	//GetWorld()->SpawnActor()
 

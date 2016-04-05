@@ -13,13 +13,13 @@ void UIdleState::ProcessInput(float DeltaTime)
 {
 	//UE_LOG(LogTemp, Warning, TEXT("idle state processinput"))
 
-	if (Owner->bShieldAction)
+	if (Glad->bShieldAction)
 	{
-		ChangeUpperState(Owner->RaisingShield);
+		ChangeUpperState(Glad->RaisingShield);
 	}
-	if (Owner->bReloadAction)
+	if (Glad->bReloadAction)
 	{
 		//UE_LOG(LogTemp, Warning, TEXT("reload action!!!!!!!"))
-		ChangeUpperState(Owner->Reloading);
+		ChangeUpperState(Glad->Reloading);
 	}
 }

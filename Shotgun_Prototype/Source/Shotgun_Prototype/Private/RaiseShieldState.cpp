@@ -17,7 +17,7 @@ void URaiseShieldState::TickState(float DeltaTime)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("raise shield tick state"))
 		SpawnShieldEvent.Broadcast();
-		ChangeUpperState(Owner->HoldingShield);
+		ChangeUpperState(Glad->HoldingShield);
 	}
 
 	//increment time since started

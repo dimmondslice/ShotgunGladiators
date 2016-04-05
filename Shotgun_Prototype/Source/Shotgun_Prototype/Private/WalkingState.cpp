@@ -14,8 +14,8 @@ void UWalkingState::ProcessInput(float DeltaTime)
 {
 	Super::ProcessInput(DeltaTime); 
 	
-	float xSpeed = Owner->MoveForwardAxis * 30.0f;
-	float ySpeed = Owner->MoveRightAxis * 30.0f;
+	float xSpeed = Glad->MoveForwardAxis * 30.0f;
+	float ySpeed = Glad->MoveRightAxis * 30.0f;
 	MoveDirection(xSpeed, ySpeed);
 
 	if (Owner->bJumpAction)

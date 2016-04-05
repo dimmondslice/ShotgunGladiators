@@ -7,9 +7,9 @@
 
 void UHoldingShieldState::TickState(float DeltaTime)
 {
-	if (!Owner->bShieldAction)
+	if (!Glad->bShieldAction)
 	{
-		ChangeUpperState(Owner->LowerShield);
+		ChangeUpperState(Glad->LowerShield);
 	}
 }
 
