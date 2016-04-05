@@ -15,7 +15,7 @@ void UReloadingState::TickState(float DeltaTime)
 	if (TimeSinceStateStarted >= 30 * FPS60ToSeconds)
 	{
 		//broadcast thatperState()
-		//ChangeUppper(Owner->Idle)
+		//ChangeUppper(Glad->Idle)
 	
 	}
 		
@@ -26,13 +26,13 @@ void UReloadingState::TickState(float DeltaTime)
 bool UReloadingState::Get_bCanUse()
 {
 	//if the mag is already full
-	if (Owner->HeldWeapon->shotsInMagazine >= Owner->HeldWeapon->magazineSize)
+	if (Glad->HeldWeapon->shotsInMagazine >= Glad->HeldWeapon->magazineSize)
 	{
 		bCanUse = false;
 		return false;
 	}
 	//if the gun has no more ammo
-	else if (Owner->HeldWeapon->currentAmmo <= 0)
+	else if (Glad->HeldWeapon->currentAmmo <= 0)
 	{
 		bCanUse = false;
 		return false;

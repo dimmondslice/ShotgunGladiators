@@ -18,13 +18,13 @@ void UWalkingState::ProcessInput(float DeltaTime)
 	float ySpeed = Glad->MoveRightAxis * 30.0f;
 	MoveDirection(xSpeed, ySpeed);
 
-	if (Owner->bJumpAction)
+	if (Glad->bJumpAction)
 	{
-		ChangeLowerState(Owner->JumpCrouch);
+		ChangeLowerState(Glad->JumpCrouch);
 	}
-	if (Owner->bDodgeAction)
+	if (Glad->bDodgeAction)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("pressed dodge"));
-		ChangeLowerState(Owner->Dodge);
+		ChangeLowerState(Glad->Dodge);
 	}
 }
