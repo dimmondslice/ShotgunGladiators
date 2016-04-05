@@ -5,24 +5,42 @@
 #include "WeaponItemBase.h"
 //#include "Engine.h"
 
-//#include "UnrealNetwork.h"
+#include "UnrealNetwork.h"
 
 
 AWeaponItemBase::AWeaponItemBase()
 {
     PrimaryActorTick.bCanEverTick = true;
 
-    bReplicates = true;
+    //bReplicates = true;
 }
 
-/*
+
 void AWeaponItemBase::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> & OutLifetimeProps) const
 {
     Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
+//Signal variables for replication
+
+    //INTS
     DOREPLIFETIME(AWeaponItemBase, maxAmmo);
+    DOREPLIFETIME(AWeaponItemBase, currentAmmo);
+    DOREPLIFETIME(AWeaponItemBase, magazineSize);
+    DOREPLIFETIME(AWeaponItemBase, shotsInMagazine);
+
+    //FLOATS
+    DOREPLIFETIME(AWeaponItemBase, reloadTime);
+    DOREPLIFETIME(AWeaponItemBase, fireRate);
+    DOREPLIFETIME(AWeaponItemBase, spread);
+    DOREPLIFETIME(AWeaponItemBase, range);
+    DOREPLIFETIME(AWeaponItemBase, baseDamage);
+
+    //BOOLS
+    DOREPLIFETIME(AWeaponItemBase, isReloading);
+    DOREPLIFETIME(AWeaponItemBase, isOnFireCooldown);
+
 }
-*/
+
 
 void AWeaponItemBase::BeginPlay() {
     Super::BeginPlay();
@@ -55,5 +73,5 @@ void AWeaponItemBase::Fire() {
 */
 
 void AWeaponItemBase::Fire_Implementation() {
-    UE_LOG(LogTemp, Error, TEXT("yo fire c++"));
+    //UE_LOG(LogTemp, Error, TEXT("yo fire c++"));
 }

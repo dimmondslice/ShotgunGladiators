@@ -2,9 +2,9 @@
 
 #include "Shotgun_Prototype.h"
 #include "ItemBase.h"
-/*
-#include "UnrealNetwork.h"
 
+#include "UnrealNetwork.h"
+/*
 #include "Engine.h"
 */
 
