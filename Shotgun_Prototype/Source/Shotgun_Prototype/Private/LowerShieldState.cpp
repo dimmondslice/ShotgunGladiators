@@ -2,6 +2,7 @@
 
 #include "Shotgun_Prototype.h"
 #include "LowerShieldState.h"
+#include "IdleState.h"
 
 void ULowerShieldState::OnBeginState()
 {
@@ -9,4 +10,12 @@ void ULowerShieldState::OnBeginState()
 }
 void ULowerShieldState::TickState(float DeltaTime)
 {
+	if (TimeSinceStateStarted >= 11 * FPS60ToSeconds)
+	{
+		DestroyShieldEvent.Broadcast();
+		ChangeUpperState(Owner->Idle);
+	}
+	//GetWorld()->SpawnActor()
+
+	TimeSinceStateStarted += DeltaTime;
 }

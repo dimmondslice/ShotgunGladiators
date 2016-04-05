@@ -4,5 +4,18 @@
 #include "ReloadingState.h"
 
 
+void UReloadingState::OnBeginState() 
+{
+
+}
+void UReloadingState::TickState(float DeltaTime)
+{
+
+}
+
+bool UReloadingState::Get_bCanUse()
+{
+	
+}
 
 

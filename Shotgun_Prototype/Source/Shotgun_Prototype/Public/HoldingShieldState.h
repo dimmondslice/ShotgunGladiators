@@ -12,8 +12,9 @@ UCLASS()
 class SHOTGUN_PROTOTYPE_API UHoldingShieldState : public UUpperBodyState
 {
 	GENERATED_BODY()
-	
-	
+
+public:
+	virtual void TickState(float DeltaTime) override;
 	
 	
 };

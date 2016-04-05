@@ -3,6 +3,7 @@
 #include "Shotgun_Prototype.h"
 #include "IdleState.h"
 #include "RaiseShieldState.h"
+#include "ReloadingState.h"
 
 void UIdleState::TickState(float DeltaTime)
 {
@@ -14,7 +15,11 @@ void UIdleState::ProcessInput(float DeltaTime)
 
 	if (Owner->bShieldAction)
 	{
-		//UE_LOG(LogTemp, Warning, TEXT("shield action!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"))
 		ChangeUpperState(Owner->RaisingShield);
+	}
+	if (Owner->bReloadAction)
+	{
+		//UE_LOG(LogTemp, Warning, TEXT("reload action!!!!!!!"))
+		ChangeUpperState(Owner->Reloading);
 	}
 }
