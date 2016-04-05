@@ -18,6 +18,8 @@ public:
 
     AWeaponItemBase();
 
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
     //virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty> & OutLifetimeProps) override;
 
     virtual void BeginPlay() override;
@@ -25,37 +27,41 @@ public:
     virtual void Tick(float DeltaSeconds) override;
 
     UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = "Weapon Stats")
-        int32 maxAmmo;
+    int32 maxAmmo;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon Stats")
-        int32 currentAmmo;
+    UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = "Weapon Stats")
+    int32 currentAmmo;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon Stats")
-        int32 magazineSize;
+    UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = "Weapon Stats")
+    int32 magazineSize;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon Stats")
-        int32 shotsInMagazine;
+    UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = "Weapon Stats")
+    int32 shotsInMagazine;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon Stats")
-        float reloadTime;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon Stats")
-        float fireRate;
+    UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = "Weapon Stats")
+    float reloadTime;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon Stats")
-        float isReloading;
+    UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = "Weapon Stats")
+    float fireRate;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon Stats")
-        float isOnFireCooldown;
+    UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = "Weapon Stats")
+    float spread;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon Stats")
-        float spread;
-
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon Stats")
+    UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = "Weapon Stats")
     float range;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon Stats")
-        float baseDamage;
+    UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = "Weapon Stats")
+    float baseDamage;
+
+
+    UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = "Weapon Stats")
+    bool isReloading;
+
+    UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = "Weapon Stats")
+    bool isOnFireCooldown;
+
+
 
 
     UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Weapon")

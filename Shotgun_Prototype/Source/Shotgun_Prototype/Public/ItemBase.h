@@ -14,6 +14,8 @@ public:
 	// Sets default values for this actor's properties
 	AItemBase();
 
+    //virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 	
