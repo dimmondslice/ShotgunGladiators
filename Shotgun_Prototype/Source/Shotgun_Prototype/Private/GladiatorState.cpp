@@ -15,8 +15,8 @@ UGladiatorState::UGladiatorState()
 	PrimaryComponentTick.bCanEverTick = true;
 	bWantsInitializeComponent = true;
 
-	//grab reference to the owner of the actor component and cast it as a Gladiator*, save it to Owner Member variable
-	Owner = (AGladiator*)GetOwner();
+	//grab reference to the Glad of the actor component and cast it as a Gladiator*, save it to Glad Member variable
+	Glad = (AGladiator*)GetOwner();
 
 	//make sure you can use every state by default
 	bCanUse = true;
@@ -51,11 +51,11 @@ void UGladiatorState::ChangeUpperState(UUpperBodyState* newState)
 {
 	if (newState->Get_bCanUse())
 	{
-		Owner->CurrentUpperState->OnStopState();
-		Owner->PreviousUpperState = Owner->CurrentUpperState;
-		Owner->PreviousUpperState->TimeSinceStateStarted = 0;
-		Owner->CurrentUpperState = newState;
-		Owner->CurrentUpperState->OnBeginState();
+		Glad->CurrentUpperState->OnStopState();
+		Glad->PreviousUpperState = Glad->CurrentUpperState;
+		Glad->PreviousUpperState->TimeSinceStateStarted = 0;
+		Glad->CurrentUpperState = newState;
+		Glad->CurrentUpperState->OnBeginState();
 	}
 }
 
@@ -63,16 +63,16 @@ void UGladiatorState::ChangeLowerState(ULowerBodyState* newState)
 {
 	if (newState->Get_bCanUse())
 	{
-		Owner->CurrentLowerState->OnStopState();
-		Owner->PreviousLowerState = Owner->CurrentLowerState;
-		Owner->PreviousLowerState->TimeSinceStateStarted = 0;
-		Owner->CurrentLowerState = newState;
-		Owner->CurrentLowerState->OnBeginState();
+		Glad->CurrentLowerState->OnStopState();
+		Glad->PreviousLowerState = Glad->CurrentLowerState;
+		Glad->PreviousLowerState->TimeSinceStateStarted = 0;
+		Glad->CurrentLowerState = newState;
+		Glad->CurrentLowerState->OnBeginState();
 	}
 }
 
 void UGladiatorState::MoveDirection(float _xValue, float _yValue)
 {
-	Owner->AddMovementInput(Owner->GetActorForwardVector(), _xValue);
-	Owner->AddMovementInput(Owner->GetActorRightVector(), _yValue);
+	Glad->AddMovementInput(Glad->GetActorForwardVector(), _xValue);
+	Glad->AddMovementInput(Glad->GetActorRightVector(), _yValue);
 }

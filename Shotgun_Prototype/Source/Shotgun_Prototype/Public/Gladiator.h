@@ -26,8 +26,8 @@ class SHOTGUN_PROTOTYPE_API AGladiator : public ACharacter
 	friend class UFallingState;
 	friend class ULandingState;
 
-		/** Pawn mesh: 1st person view (arms; seen only by self) */
-		UPROPERTY(VisibleDefaultsOnly, Category = Mesh)
+	/** Pawn mesh: 1st person view (arms; seen only by self) */
+	UPROPERTY(VisibleDefaultsOnly, Category = Mesh)
 	class USkeletalMeshComponent* Mesh1P;
 
 	/** Gun mesh: 1st person view (seen only by self) */
@@ -127,7 +127,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class AWeaponItemBase* HeldWeapon;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	class AShieldItemBase* HeldShield;
+	class AShieldItemBase* HeldShield; 
 
 private:
 	void SetJumpPressed();

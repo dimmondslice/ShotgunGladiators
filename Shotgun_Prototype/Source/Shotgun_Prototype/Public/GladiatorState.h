@@ -35,7 +35,7 @@ public:
 
 
 	//reference to this actor components actor, cast as a Gladiator
-	class AGladiator* Owner;
+	class AGladiator* Glad;
 	//number of seconds that have passed since the state started
 	float TimeSinceStateStarted;
 

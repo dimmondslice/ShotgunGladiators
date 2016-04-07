@@ -2,6 +2,8 @@
 
 #include "Shotgun_Prototype.h"
 #include "LowerShieldState.h"
+#include "IdleState.h"
+#include "ShieldItemBase.h"
 
 void ULowerShieldState::OnBeginState()
 {
@@ -9,4 +11,20 @@ void ULowerShieldState::OnBeginState()
 }
 void ULowerShieldState::TickState(float DeltaTime)
 {
+	if (TimeSinceStateStarted >= 11 * FPS60ToSeconds)
+	{
+		DestroyShield_Server();
+		//DestroyShieldEvent.Broadcast();
+		ChangeUpperState(Glad->Idle);
+	}
+	TimeSinceStateStarted += DeltaTime;
+}
+
+void ULowerShieldState::DestroyShield_Server_Implementation()
+{
+	Glad->HeldShield->Destroy();
+}
+bool ULowerShieldState::DestroyShield_Server_Validate()
+{
+	return true;
 }

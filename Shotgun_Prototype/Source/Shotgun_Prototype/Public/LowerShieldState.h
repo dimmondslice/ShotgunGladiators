@@ -21,4 +21,7 @@ public:
 	UPROPERTY(BlueprintAssignable, Category = "Gladiator")
 	FDestroyShieldDelegate DestroyShieldEvent;
 	
+
+	UFUNCTION(Server, Reliable, WithValidation)
+	void DestroyShield_Server();
 };

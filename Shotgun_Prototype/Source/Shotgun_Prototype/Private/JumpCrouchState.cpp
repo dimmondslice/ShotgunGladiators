@@ -6,8 +6,8 @@
 
 void UJumpCrouchState::OnBeginState()
 {
-	Owner->Jump();
-	ChangeLowerState(Owner->Falling);
+	Glad->Jump();
+	ChangeLowerState(Glad->Falling);
 }
 void UJumpCrouchState::TickState(float DeltaTime)
 {
