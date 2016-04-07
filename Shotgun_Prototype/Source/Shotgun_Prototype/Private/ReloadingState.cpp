@@ -59,5 +59,3 @@ bool UReloadingState::Get_bCanUse()
 	}
     */
 }
-
-

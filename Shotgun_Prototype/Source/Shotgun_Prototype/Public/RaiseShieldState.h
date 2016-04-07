@@ -21,4 +21,7 @@ public:
 	UPROPERTY(BlueprintAssignable, Category = "Gladiator")
 	FSpawnShieldDelegate SpawnShieldEvent;
 
+	UFUNCTION(Server, Reliable, WithValidation)
+	void SpawnShield_Server();
+
 };
