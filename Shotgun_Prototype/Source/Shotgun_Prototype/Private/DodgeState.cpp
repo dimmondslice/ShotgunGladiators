@@ -25,7 +25,7 @@ bool UDodgeState::Get_bCanUse()
 }
 void UDodgeState::OnBeginState()
 {
-	
+    BeginDodgeAnimEvent.Broadcast();
 }
 
 void UDodgeState::OnStopState()

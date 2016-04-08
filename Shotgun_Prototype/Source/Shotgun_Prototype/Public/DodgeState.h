@@ -39,6 +39,9 @@ public:
     FDodgeEventDelegate BeginDodgeEvent;
     
     UPROPERTY(BlueprintAssignable, Category = "Gladiator State/Dodge")
+    FDodgeEventDelegate BeginDodgeAnimEvent;
+
+    UPROPERTY(BlueprintAssignable, Category = "Gladiator State/Dodge")
     FDodgeEventDelegate EndDodgeEvent;
 
 
