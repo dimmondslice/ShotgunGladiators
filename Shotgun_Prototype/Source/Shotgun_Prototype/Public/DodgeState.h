@@ -33,14 +33,19 @@ private:
 
 public:
     
-    DECLARE_DYNAMIC_MULTICAST_DELEGATE(FBeginDodgeEventDelegate);
-    UPROPERTY(BlueprintAssignable, Category = "Gladiator")
-    FBeginDodgeEventDelegate BeginDodgeEvent;
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDodgeEventDelegate);
+
+    UPROPERTY(BlueprintAssignable, Category = "Gladiator State/Dodge")
+    FDodgeEventDelegate BeginDodgeEvent;
     
+    UPROPERTY(BlueprintAssignable, Category = "Gladiator State/Dodge")
+    FDodgeEventDelegate EndDodgeEvent;
+
 
 	virtual void TickState(float DeltaTime) override;
 	virtual void ProcessInput(float DeltaTime) override;
 	virtual void OnBeginState() override;
+    virtual void OnStopState() override;
 	virtual bool Get_bCanUse() override;
 
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;

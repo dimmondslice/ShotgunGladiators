@@ -26,8 +26,9 @@ class SHOTGUN_PROTOTYPE_API AGladiator : public ACharacter
 	friend class UFallingState;
 	friend class ULandingState;
 
+public:
 	/** Pawn mesh: 1st person view (arms; seen only by self) */
-	UPROPERTY(VisibleDefaultsOnly, Category = Mesh)
+	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = Mesh)
 	class USkeletalMeshComponent* Mesh1P;
 
 	/** Gun mesh: 1st person view (seen only by self) */

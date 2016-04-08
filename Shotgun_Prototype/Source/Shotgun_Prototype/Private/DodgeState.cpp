@@ -27,6 +27,12 @@ void UDodgeState::OnBeginState()
 {
 	
 }
+
+void UDodgeState::OnStopState()
+{
+    EndDodgeEvent.Broadcast();
+}
+
 void UDodgeState::TickState(float DeltaTime)
 {
 	TimeSinceStateStarted += DeltaTime;
