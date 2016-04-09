@@ -25,8 +25,14 @@ bool UDodgeState::Get_bCanUse()
 }
 void UDodgeState::OnBeginState()
 {
-	
+    BeginDodgeAnimEvent.Broadcast();
 }
+
+void UDodgeState::OnStopState()
+{
+    EndDodgeEvent.Broadcast();
+}
+
 void UDodgeState::TickState(float DeltaTime)
 {
 	TimeSinceStateStarted += DeltaTime;
