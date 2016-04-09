@@ -15,4 +15,6 @@ class SHOTGUN_PROTOTYPE_API UFallingState : public ULowerBodyState
 	
 	virtual void TickState(float DeltaTime) override;
 	virtual void ProcessInput(float DeltaTime) override;
+
+	virtual void OnBeginState() override;
 };

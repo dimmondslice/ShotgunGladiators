@@ -3,6 +3,3 @@
 #include "Shotgun_Prototype.h"
 #include "LowerBodyState.h"
 
-
-
-

@@ -53,6 +53,8 @@ public:
 	virtual bool Get_bCanUse() override;
 
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+	virtual void BeginPlay() override;
+
 
 	void ExecuteDodge();
 

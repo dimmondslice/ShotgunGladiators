@@ -4,6 +4,7 @@
 #include "DodgeState.h"
 #include "walkingState.h"
 #include "FallingState.h"
+#include "LandingState.h"
 
 UDodgeState::UDodgeState()
 {
@@ -32,21 +33,30 @@ void UDodgeState::OnBeginState()
 void UDodgeState::OnStopState()
 {
     EndDodgeEvent.Broadcast();
+	bExecutedDodge = false;
 }
 
 void UDodgeState::TickState(float DeltaTime)
 {
-	TimeSinceStateStarted += DeltaTime;
 	if (TimeSinceStateStarted >= 15 * FPS60ToSeconds)
 	{
 		ChangeLowerState(Glad->Falling);
-		bExecutedDodge = false;
+		
 		return;
 	}
 	else if (TimeSinceStateStarted > 6 * FPS60ToSeconds && !bExecutedDodge)
 	{
 		ExecuteDodge();
 	}
+	else if (TimeSinceStateStarted >= 6 * FPS60ToSeconds)
+	{
+		if (!Glad->GetMovementComponent()->IsFalling())
+		{
+			ChangeLowerState(Glad->Landing);
+		}
+	}
+
+	TimeSinceStateStarted += DeltaTime;
 }
 
 void UDodgeState::ProcessInput(float DeltaTime)
@@ -85,4 +95,11 @@ void UDodgeState::TickComponent(float DeltaTime, ELevelTick TickType, FActorComp
 		CurrentRechargeTimer = RechargeTime;
 	}
 	//UE_LOG(LogTemp, Warning, TEXT("current charges remaining %i"), CurrentChargesRemaining);
+}
+
+void UDodgeState::BeginPlay()
+{
+	Super::BeginPlay();
+
+	CurrentChargesRemaining = MaxNumOfCharges;
 }
