@@ -58,6 +58,8 @@ void UDodgeState::ExecuteDodge()
 	bExecutedDodge = true;
 	//decrement number of times you can use the charge
 	CurrentChargesRemaining -= 1;
+	//reset the timer, no extra dodges for you!
+	CurrentRechargeTimer = RechargeTime;
 
 	//create dodge direction by adding your forward vector and right vector Multiplied by your stick direction
 	FVector LaunchDir = Glad->GetActorForwardVector() * Glad->MoveForwardAxis +
