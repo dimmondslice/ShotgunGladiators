@@ -4,7 +4,8 @@
 #include "WalkingState.h"
 #include "JumpCrouchState.h"
 #include "DodgeState.h"
-
+#include "HoldingShieldState.h"
+#include "ShieldBashState.h"
 
 void UWalkingState::TickState(float DeltaTime)
 {   
@@ -24,7 +25,19 @@ void UWalkingState::ProcessInput(float DeltaTime)
 	}
 	if (Glad->bDodgeAction)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("pressed dodge"));
-		ChangeLowerState(Glad->Dodge);
+		//if the upper body is shielding then you might want to do a shield bash
+		if (Glad->CurrentUpperState == Glad->HoldingShield)
+		{
+			FVector2D inputVec = FVector2D(Glad->MoveForwardAxis, Glad->MoveRightAxis);
+			//if there is no stick input, or forward input, we want to do a shield bash
+			if (inputVec == FVector2D::ZeroVector || inputVec.X > 0.0f)
+			{
+				ChangeUpperState(Glad->ShieldBash);
+			}
+		}
+		else
+		{
+			ChangeLowerState(Glad->Dodge);
+		}
 	}
 }
