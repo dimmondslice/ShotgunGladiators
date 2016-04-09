@@ -34,6 +34,7 @@ void UWalkingState::ProcessInput(float DeltaTime)
 			{
 				ChangeUpperState(Glad->ShieldBash);
 			}
+			ChangeLowerState(Glad->Dodge);
 		}
 		else
 		{
