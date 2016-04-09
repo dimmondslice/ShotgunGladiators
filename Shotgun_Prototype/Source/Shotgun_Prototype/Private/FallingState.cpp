@@ -14,3 +14,7 @@ void UFallingState::ProcessInput(float DeltaTime)
 	float ySpeed = Glad->MoveRightAxis;
 	MoveDirection(xSpeed, ySpeed);
 }
+
+void UFallingState::OnBeginState()
+{
+}
