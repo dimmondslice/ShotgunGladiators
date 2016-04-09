@@ -61,8 +61,10 @@ void UGladiatorState::ChangeUpperState(UUpperBodyState* newState)
 
 void UGladiatorState::ChangeLowerState(ULowerBodyState* newState)
 {
+
 	if (newState->Get_bCanUse())
 	{
+		UE_LOG(LogTemp, Warning, TEXT("new state can use"));
 		Glad->CurrentLowerState->OnStopState();
 		Glad->PreviousLowerState = Glad->CurrentLowerState;
 		Glad->PreviousLowerState->TimeSinceStateStarted = 0;
