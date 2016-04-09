@@ -8,6 +8,7 @@
 UDodgeState::UDodgeState()
 {
 	CurrentRechargeTimer = RechargeTime;
+	bExecutedDodge = false;
 }
 bool UDodgeState::Get_bCanUse()
 {
@@ -36,10 +37,15 @@ void UDodgeState::OnStopState()
 void UDodgeState::TickState(float DeltaTime)
 {
 	TimeSinceStateStarted += DeltaTime;
-	if (TimeSinceStateStarted > 6 * FPS60ToSeconds)
+	if (TimeSinceStateStarted >= 15 * FPS60ToSeconds)
+	{
+		ChangeLowerState(Glad->Falling);
+		bExecutedDodge = false;
+		return;
+	}
+	else if (TimeSinceStateStarted > 6 * FPS60ToSeconds && !bExecutedDodge)
 	{
 		ExecuteDodge();
-		ChangeLowerState(Glad->Falling);
 	}
 }
 
@@ -49,8 +55,11 @@ void UDodgeState::ProcessInput(float DeltaTime)
 
 void UDodgeState::ExecuteDodge()
 {
+	bExecutedDodge = true;
 	//decrement number of times you can use the charge
 	CurrentChargesRemaining -= 1;
+	//reset the timer, no extra dodges for you!
+	CurrentRechargeTimer = RechargeTime;
 
 	//create dodge direction by adding your forward vector and right vector Multiplied by your stick direction
 	FVector LaunchDir = Glad->GetActorForwardVector() * Glad->MoveForwardAxis +
