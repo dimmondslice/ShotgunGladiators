@@ -30,6 +30,7 @@ public:
 private:
 	
 	float CurrentRechargeTimer;
+	bool bExecutedDodge;
 
 public:
     

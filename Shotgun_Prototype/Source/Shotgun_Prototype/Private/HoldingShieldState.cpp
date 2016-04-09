@@ -7,6 +7,10 @@
 
 void UHoldingShieldState::TickState(float DeltaTime)
 {
+	if (Glad->HeldWeapon == NULL)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("pleaseeeeeeeeeeeeeeeeee"));
+	}
 	if (!Glad->bShieldAction)
 	{
 		ChangeUpperState(Glad->LowerShield);
