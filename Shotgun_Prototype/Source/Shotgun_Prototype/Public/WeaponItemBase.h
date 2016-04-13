@@ -2,6 +2,8 @@
 
 #pragma once
 
+//#include "ShotgunDamageType.h"
+
 #include "ItemBase.h"
 #include "WeaponItemBase.generated.h"
 
@@ -61,7 +63,10 @@ public:
     UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = "Weapon Stats")
     bool isOnFireCooldown;
 
-
+    //********** Crashes when EditAnywhere is in UPROPERTY **********
+        //Don't forget to uncomment Header File
+    //UPROPERTY(BlueprintReadWrite, Category = "WeaponStats")
+    //UShotgunDamageType* damageType;
 
 
     UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Weapon")
