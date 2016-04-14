@@ -20,6 +20,7 @@ class SHOTGUN_PROTOTYPE_API AGladiator : public ACharacter
 	friend class UHoldingShieldState;
 	friend class UShieldBashState;
 	
+	friend class ULowerIdleState;
 	friend class UWalkingState;
 	friend class UDodgeState;
 	friend class UJumpCrouchState;
@@ -184,6 +185,8 @@ public:
 	class UShieldBashState* ShieldBash;
 
 	//lower body
+	UPROPERTY(VisibleAnywhere)
+	class ULowerIdleState* LowerIdle;
 	UPROPERTY(VisibleAnywhere)
 	class UWalkingState* Walking;
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)

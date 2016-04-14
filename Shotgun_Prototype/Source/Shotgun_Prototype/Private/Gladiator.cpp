@@ -15,6 +15,7 @@
 #include "HoldingShieldState.h"
 #include "ShieldBashState.h"
 
+#include "LowerIdleState.h"
 #include "WalkingState.h"
 #include "DodgeState.h"
 #include "JumpCrouchState.h"
@@ -73,6 +74,7 @@ AGladiator::AGladiator()
 	HoldingShield = CreateDefaultSubobject<UHoldingShieldState>(TEXT("HoldingShield"));
 	ShieldBash = CreateDefaultSubobject<UShieldBashState>(TEXT("ShieldBash"));
 
+	LowerIdle = CreateDefaultSubobject<ULowerIdleState>(TEXT("LowerIdle"));
 	Walking = CreateDefaultSubobject<UWalkingState>(TEXT("WalkingState"));
 	Dodge = CreateDefaultSubobject<UDodgeState>(TEXT("DodgeState"));
 	JumpCrouch = CreateDefaultSubobject<UJumpCrouchState>(TEXT("JumpCrouch"));
@@ -80,7 +82,7 @@ AGladiator::AGladiator()
 	Landing = CreateDefaultSubobject<ULandingState>(TEXT("Landing"));
 
 	CurrentUpperState = Idle;
-	CurrentLowerState = Walking;
+	CurrentLowerState = LowerIdle;
 
 	WalkSpeed = 10.f;
 }
@@ -250,7 +252,7 @@ void AGladiator::BeginPlay()
 {
 	Super::BeginPlay();
 	CurrentUpperState = Idle;
-	CurrentLowerState = Walking;
+	CurrentLowerState = LowerIdle;
 
 	FActorSpawnParameters param;
 	//param.
