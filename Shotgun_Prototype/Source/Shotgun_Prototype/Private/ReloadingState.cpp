@@ -10,20 +10,20 @@ void UReloadingState::OnBeginState()
 {
 	//broadcast fn to play anim
 
-    UE_LOG(LogTemp, Error, TEXT("Enter Reload"));
+    //UE_LOG(LogTemp, Error, TEXT("Enter Reload"));
     BeginReloadEvent.Broadcast();
 }
 
 void UReloadingState::OnStopState()
 {
-    UE_LOG(LogTemp, Error, TEXT("Exit Reload"));
+    //UE_LOG(LogTemp, Error, TEXT("Exit Reload"));
     EndReloadEvent.Broadcast();
 }
 
 void UReloadingState::TickState(float DeltaTime)
 {
     TimeSinceStateStarted += DeltaTime;
-    UE_LOG(LogTemp, Error, TEXT("ticking"));
+    //UE_LOG(LogTemp, Error, TEXT("ticking"));
 
 	if (TimeSinceStateStarted >= reloadTime)
 	{
