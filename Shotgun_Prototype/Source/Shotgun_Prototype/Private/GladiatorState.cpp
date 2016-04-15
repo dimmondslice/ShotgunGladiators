@@ -64,12 +64,12 @@ void UGladiatorState::ChangeLowerState(ULowerBodyState* newState)
 
 	if (newState->Get_bCanUse())
 	{
-		UE_LOG(LogTemp, Warning, TEXT("new state can use"));
 		Glad->CurrentLowerState->OnStopState();
 		Glad->PreviousLowerState = Glad->CurrentLowerState;
 		Glad->PreviousLowerState->TimeSinceStateStarted = 0;
 		Glad->CurrentLowerState = newState;
 		Glad->CurrentLowerState->OnBeginState();
+		UE_LOG(LogTemp, Warning, TEXT("changed into %s "), *Glad->CurrentLowerState->GetName());
 	}
 }
 
