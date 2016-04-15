@@ -47,7 +47,7 @@ void UGladiatorState::OnBeginState(){}
 void UGladiatorState::OnStopState(){}
 void UGladiatorState::PauseState(){}
 
-void UGladiatorState::ChangeUpperState(UUpperBodyState* newState)
+void UGladiatorState::ChangeUpperState_Implementation(UUpperBodyState* newState)
 {
 	if (newState->Get_bCanUse())
 	{
@@ -58,8 +58,11 @@ void UGladiatorState::ChangeUpperState(UUpperBodyState* newState)
 		Glad->CurrentUpperState->OnBeginState();
 	}
 }
-
-void UGladiatorState::ChangeLowerState(ULowerBodyState* newState)
+bool UGladiatorState::ChangeUpperState_Validate(class UUpperBodyState* newState)
+{
+	return true;
+}
+void UGladiatorState::ChangeLowerState_Implementation(ULowerBodyState* newState)
 {
 
 	if (newState->Get_bCanUse())
@@ -72,7 +75,10 @@ void UGladiatorState::ChangeLowerState(ULowerBodyState* newState)
 		UE_LOG(LogTemp, Warning, TEXT("changed into %s "), *Glad->CurrentLowerState->GetName());
 	}
 }
-
+bool UGladiatorState::ChangeLowerState_Validate(class ULowerBodyState* newState)
+{
+	return true;
+}
 void UGladiatorState::MoveDirection(float _xValue, float _yValue)
 {
 	Glad->AddMovementInput(Glad->GetActorForwardVector(), _xValue);
