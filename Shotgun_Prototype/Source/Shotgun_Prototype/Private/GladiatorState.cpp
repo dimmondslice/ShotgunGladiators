@@ -6,6 +6,8 @@
 #include "LowerBodyState.h"
 #include "Gladiator.h"
 
+#include "UnrealNetwork.h"
+
 // Sets default values for this component's properties
 UGladiatorState::UGladiatorState()
 {
@@ -47,8 +49,22 @@ void UGladiatorState::OnBeginState(){}
 void UGladiatorState::OnStopState(){}
 void UGladiatorState::PauseState(){}
 
+void UGladiatorState::ChangeUpperState_Server_Implementation(UUpperBodyState* newState)
+{
+    ChangeUpperState(newState);
+}
+bool UGladiatorState::ChangeUpperState_Server_Validate(UUpperBodyState* newState)
+{
+    return true;
+}
+
 void UGladiatorState::ChangeUpperState_Implementation(UUpperBodyState* newState)
 {
+
+    if (Glad->Role < ROLE_Authority) {
+        ChangeUpperState_Server(newState);
+    }
+
 	if (newState->Get_bCanUse())
 	{
 		Glad->CurrentUpperState->OnStopState();
@@ -62,6 +78,8 @@ bool UGladiatorState::ChangeUpperState_Validate(class UUpperBodyState* newState)
 {
 	return true;
 }
+
+
 void UGladiatorState::ChangeLowerState_Implementation(ULowerBodyState* newState)
 {
 
@@ -79,6 +97,17 @@ bool UGladiatorState::ChangeLowerState_Validate(class ULowerBodyState* newState)
 {
 	return true;
 }
+
+void UGladiatorState::ChangeLowerState_Server_Implementation(ULowerBodyState * newState)
+{
+    ChangeLowerState(newState);
+}
+
+bool UGladiatorState::ChangeLowerState_Server_Validate(ULowerBodyState * newState)
+{
+    return true;
+}
+
 void UGladiatorState::MoveDirection(float _xValue, float _yValue)
 {
 	Glad->AddMovementInput(Glad->GetActorForwardVector(), _xValue);
