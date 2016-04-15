@@ -38,17 +38,20 @@ void UDodgeState::OnStopState()
 
 void UDodgeState::TickState(float DeltaTime)
 {
-	if (TimeSinceStateStarted >= 15 * FPS60ToSeconds)
+	//if you're falling for a real long time, we probably want to start playing the falling anim
+	if (TimeSinceStateStarted >= 35 * FPS60ToSeconds)
 	{
 		ChangeLowerState(Glad->Falling);
 		
 		return;
 	}
-	else if (TimeSinceStateStarted > 6 * FPS60ToSeconds && !bExecutedDodge)
+	//actually execute the dodge
+	if (TimeSinceStateStarted > 6 * FPS60ToSeconds && !bExecutedDodge)
 	{
 		ExecuteDodge();
 	}
-	else if (TimeSinceStateStarted >= 10 * FPS60ToSeconds)
+	//temporary fix for if you dodge into a slope
+	else if (TimeSinceStateStarted >= 12 * FPS60ToSeconds)
 	{
 		if (!Glad->GetMovementComponent()->IsFalling())
 		{
