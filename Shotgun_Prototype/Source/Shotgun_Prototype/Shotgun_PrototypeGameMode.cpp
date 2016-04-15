@@ -3,7 +3,7 @@
 #include "Shotgun_Prototype.h"
 #include "Shotgun_PrototypeGameMode.h"
 #include "Shotgun_PrototypeHUD.h"
-#include "Shotgun_PrototypeCharacter.h"
+//#include "Shotgun_PrototypeCharacter.h"
 
 AShotgun_PrototypeGameMode::AShotgun_PrototypeGameMode()
 	: Super()

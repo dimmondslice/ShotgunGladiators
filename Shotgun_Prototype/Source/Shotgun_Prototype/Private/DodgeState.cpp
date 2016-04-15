@@ -48,7 +48,7 @@ void UDodgeState::TickState(float DeltaTime)
 	{
 		ExecuteDodge();
 	}
-	else if (TimeSinceStateStarted >= 6 * FPS60ToSeconds)
+	else if (TimeSinceStateStarted >= 10 * FPS60ToSeconds)
 	{
 		if (!Glad->GetMovementComponent()->IsFalling())
 		{
