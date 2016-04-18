@@ -10,10 +10,7 @@
 
 void ULowerIdleState::TickState(float DeltaTime)
 {
-	if (Glad->MoveForwardAxis != 0 || Glad->MoveRightAxis != 0)
-	{
-		ChangeLowerState(Glad->Walking);
-	}
+	
 }
 void ULowerIdleState::ProcessInput(float DeltaTime)
 {
@@ -38,5 +35,9 @@ void ULowerIdleState::ProcessInput(float DeltaTime)
 		{
 			ChangeLowerState(Glad->Dodge);
 		}
+	}
+	else if (Glad->MoveForwardAxis != 0 || Glad->MoveRightAxis != 0)
+	{
+		ChangeLowerState(Glad->Walking);
 	}
 }

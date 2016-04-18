@@ -57,6 +57,8 @@ public:
 	/**Changes the current upper body state
 	@param newState is the new upperbody state you want to transition to
 	*/
+	
+
 	UFUNCTION(NetMulticast, Reliable, WithValidation)
 	virtual void ChangeUpperState(class UUpperBodyState* newState);
 	/**Changes the current lower body state
