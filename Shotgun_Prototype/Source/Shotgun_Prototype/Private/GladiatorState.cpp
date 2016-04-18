@@ -60,11 +60,11 @@ bool UGladiatorState::ChangeUpperState_Server_Validate(UUpperBodyState* newState
 
 void UGladiatorState::ChangeUpperState_Implementation(UUpperBodyState* newState)
 {
-
+    /*
     if (Glad->Role < ROLE_Authority) {
         ChangeUpperState_Server(newState);
     }
-
+    */
 	if (newState->Get_bCanUse())
 	{
 		Glad->CurrentUpperState->OnStopState();
