@@ -5,6 +5,21 @@
 #include "GameFramework/Character.h"
 #include "Gladiator.generated.h"
 
+
+USTRUCT(Blueprintable)
+struct FGladiatorAttributes
+{
+    GENERATED_USTRUCT_BODY()
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Gladiator|Attributes")
+    float walkSpeed;
+
+
+    FGladiatorAttributes()
+    {}
+};
+
+
 UCLASS()
 class SHOTGUN_PROTOTYPE_API AGladiator : public ACharacter
 {
@@ -123,7 +138,12 @@ public:
 //==================================================================================================
 public:
 	virtual void BeginPlay() override;
-
+    
+public:
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Gladiator|Attributes")
+    struct FGladiatorAttributes attributes;
+    
+public:
 	UPROPERTY(EditAnywhere)
 	float WalkSpeed;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -152,6 +172,15 @@ public:
 	void LaunchCharacter_Server(FVector LaunchVelocity, bool bXYOverride, bool bZOverride);
 
 
+    UFUNCTION(Server, Reliable, WithValidation, BlueprintCallable, Category = "Gladiator|Attributes")
+    void ApplyValuesFromAttribute(FGladiatorAttributes newAttributes);
+    UFUNCTION(NetMulticast, Reliable, WithValidation, BlueprintCallable, Category = "Gladiator|Attributes")
+    void ApplyValuesFromAttribute_Multicast(FGladiatorAttributes newAttributes);
+    
+    UFUNCTION(Server, Reliable, WithValidation, BlueprintCallable, Category="Gladiator|Attributes")
+    void SetWalkSpeed(float speed);
+    UFUNCTION(NetMulticast, Reliable, WithValidation, BlueprintCallable, Category = "Gladiator|Attributes")
+    void SetWalkSpeed_Multicast(float speed);
 
 protected:
 	bool bJumpAction;

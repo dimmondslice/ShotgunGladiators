@@ -301,14 +301,57 @@ void AGladiator::Landed(const FHitResult & Hit)
 
 void AGladiator::LaunchCharacter_Server_Implementation(FVector LaunchVelocity, bool bXYOverride, bool bZOverride)
 {
-	UE_LOG(LogTemp, Warning, TEXT("called implementation"));
-	LaunchCharacter(LaunchVelocity,bXYOverride,bZOverride);
+    UE_LOG(LogTemp, Warning, TEXT("called implementation"));
+    LaunchCharacter(LaunchVelocity, bXYOverride, bZOverride);
 }
 bool AGladiator::LaunchCharacter_Server_Validate(FVector LaunchVelocity, bool bXYOverride, bool bZOverride)
 {
-	//this function exists and is required for the client to validate itself, to prevent cheating.
-	//We're not actually going to implement any check though
-	return true;
+    //this function exists and is required for the client to validate itself, to prevent cheating.
+    //We're not actually going to implement any check though
+    return true;
+}
+
+//Update the current Attributes with a Supplied FGladiatorAttribute Struct
+    //Server
+void AGladiator::ApplyValuesFromAttribute_Implementation(FGladiatorAttributes newAttributes)
+{
+    ApplyValuesFromAttribute_Multicast(newAttributes);
+}
+bool AGladiator::ApplyValuesFromAttribute_Validate(FGladiatorAttributes newAttributes)
+{
+    return true;
+}
+    //Multicast
+void AGladiator::ApplyValuesFromAttribute_Multicast_Implementation(FGladiatorAttributes newAttributes)
+{
+    //SetWalkSpeed(newAttributes.walkSpeed);
+    GetCharacterMovement()->MaxWalkSpeed = newAttributes.walkSpeed;
+
+}
+bool AGladiator::ApplyValuesFromAttribute_Multicast_Validate(FGladiatorAttributes newAttributes)
+{
+    return true;
+}
+
+
+void AGladiator::SetWalkSpeed_Implementation(float speed)
+{
+    SetWalkSpeed_Multicast(speed);
+}
+
+bool AGladiator::SetWalkSpeed_Validate(float speed)
+{
+    return true;
+}
+
+void AGladiator::SetWalkSpeed_Multicast_Implementation(float speed)
+{
+    GetCharacterMovement()->MaxWalkSpeed = speed;
+
+}
+bool AGladiator::SetWalkSpeed_Multicast_Validate(float speed)
+{
+    return true;
 }
 
 void AGladiator::ChangeUpperState(UUpperBodyState* newState)
