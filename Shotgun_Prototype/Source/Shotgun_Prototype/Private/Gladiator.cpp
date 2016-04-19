@@ -1,3 +1,4 @@
+
 #include "Shotgun_Prototype.h"
 #include "Gladiator.h"
 #include "Shotgun_PrototypeProjectile.h"
@@ -289,11 +290,8 @@ void AGladiator::Tick(float DeltaSeconds)
     //update current states
 	CurrentUpperState->TickState(DeltaSeconds);
 	CurrentLowerState->TickState(DeltaSeconds);
-	//UE_LOG(LogTemp, Warning, TEXT(CurrentLowerState->GetName()));
-	if (bShieldAction)
-	{
-		
-	}
+	
+	UE_LOG(LogTemp, Warning, TEXT("%s is in %s"), *GetName(), *CurrentLowerState->GetName());
 }
 
 void AGladiator::Landed(const FHitResult & Hit)
