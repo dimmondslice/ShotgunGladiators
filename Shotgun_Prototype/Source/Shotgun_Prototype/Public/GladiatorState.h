@@ -57,10 +57,20 @@ public:
 	/**Changes the current upper body state
 	@param newState is the new upperbody state you want to transition to
 	*/
+
+    UFUNCTION(Server, Reliable, WithValidation)
+    void ChangeUpperState_Server(class UUpperBodyState* newState);
+
+	UFUNCTION(NetMulticast, Reliable, WithValidation)
 	virtual void ChangeUpperState(class UUpperBodyState* newState);
 	/**Changes the current lower body state
 	@param newState is the new lowerbody state you want to transition to
 	*/
+
+    UFUNCTION(Server, Reliable, WithValidation)
+    void ChangeLowerState_Server(class ULowerBodyState* newState);
+
+	UFUNCTION(NetMulticast, Reliable, WithValidation)
 	virtual void ChangeLowerState(class ULowerBodyState* newState);
 
 	float FPS60ToSeconds = 0.0166667f;

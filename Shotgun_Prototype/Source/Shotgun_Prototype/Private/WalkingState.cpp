@@ -15,6 +15,8 @@ void UWalkingState::TickState(float DeltaTime)
 	{
 		ChangeLowerState(Glad->LowerIdle);
 	}
+
+	
 }
 
 void UWalkingState::ProcessInput(float DeltaTime)
