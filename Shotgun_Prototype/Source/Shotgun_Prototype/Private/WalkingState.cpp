@@ -11,12 +11,16 @@
 
 void UWalkingState::TickState(float DeltaTime)
 {   
-	if ((Glad->MoveForwardAxis == 0) && (Glad->MoveRightAxis == 0))
+	//only switch back to lower idle if you've been in this state long enough to have moved forward if you wanted to
+	if (TimeSinceStateStarted > 5 * FPS60ToSeconds)
 	{
-		ChangeLowerState(Glad->LowerIdle);
+		if (Glad->GetVelocity().IsNearlyZero())
+		{
+			ChangeLowerState(Glad->LowerIdle);
+		}
 	}
 
-	
+	TimeSinceStateStarted += DeltaTime;
 }
 
 void UWalkingState::ProcessInput(float DeltaTime)
@@ -25,6 +29,27 @@ void UWalkingState::ProcessInput(float DeltaTime)
 	float ySpeed = Glad->MoveRightAxis * 30.0f;
 	MoveDirection(xSpeed, ySpeed);
 
-	//we want all the same defualt transitions found in LowerIdle, so just call its process input
-	Glad->LowerIdle->ProcessInput(DeltaTime);
+	//Glad->LowerIdle->ProcessInput(DeltaTime);
+	if (Glad->bJumpAction)
+	{
+		ChangeLowerState(Glad->JumpCrouch);
+	}
+	else if (Glad->bDodgeAction)
+	{
+		//if the upper body is shielding then you might want to do a shield bash
+		if (Glad->CurrentUpperState == Glad->HoldingShield)
+		{
+			FVector2D inputVec = FVector2D(Glad->MoveForwardAxis, Glad->MoveRightAxis);
+			//if there is no stick input, or forward input, we want to do a shield bash
+			if (inputVec == FVector2D::ZeroVector || inputVec.X > 0.0f)
+			{
+				ChangeUpperState(Glad->ShieldBash);
+			}
+			ChangeLowerState(Glad->Dodge);
+		}
+		else
+		{
+			ChangeLowerState(Glad->Dodge);
+		}
+	}
 }

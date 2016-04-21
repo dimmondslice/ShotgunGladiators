@@ -288,6 +288,7 @@ void AGladiator::Tick(float DeltaSeconds)
     Super::Tick(DeltaSeconds);
     
     //update current states
+
 	CurrentUpperState->TickState(DeltaSeconds);
 	CurrentLowerState->TickState(DeltaSeconds);
 	
