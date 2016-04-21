@@ -82,7 +82,7 @@ bool UGladiatorState::ChangeUpperState_Validate(class UUpperBodyState* newState)
 //===========================================================================================
 void UGladiatorState::ChangeLowerState(ULowerBodyState* newState)
 {
-	Internal_ChangeLowerState(newState);
+	//Internal_ChangeLowerState(newState);
 	//calls a function which runs on the server which then calls a multicast of the inter CLS
 	ChangeLowerState_Server(newState);
 }
@@ -95,7 +95,7 @@ void UGladiatorState::Internal_ChangeLowerState(class ULowerBodyState* newState)
 		Glad->PreviousLowerState->TimeSinceStateStarted = 0;
 		Glad->CurrentLowerState = newState;
 		Glad->CurrentLowerState->OnBeginState();
-		UE_LOG(LogTemp, Warning, TEXT("%s changed into %s "), *Glad->GetName(), *Glad->CurrentLowerState->GetName());
+		//UE_LOG(LogTemp, Warning, TEXT("%s changed into %s "), *Glad->GetName(), *Glad->CurrentLowerState->GetName());
 	}
 }
 void UGladiatorState::ChangeLowerState_Server_Implementation(ULowerBodyState * newState)
