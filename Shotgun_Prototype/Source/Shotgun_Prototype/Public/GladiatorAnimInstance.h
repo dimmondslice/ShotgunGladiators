@@ -31,4 +31,8 @@ public:
     void FootTrace(USkeletalMeshComponent* mesh, FVector rootPos, FVector ikTraceStartPos, FVector ikTraceEndPos, FVector footAnkeOffset, ECollisionChannel traceChannel, TArray<AActor*> ignoredActors,
                    bool& hit, FVector& hitLocation, float& hipOffset, FRotator& footRotation, FVector& hitNormal);
 	
+    /*
+    UFUNCTION(BlueprintCallable, Category = "IK|Hands")
+    void HandleHandIK(USkeletalMeshComponent* skelMeshComponent, FName socketName, FTransform& IKTransform);
+    */
 };

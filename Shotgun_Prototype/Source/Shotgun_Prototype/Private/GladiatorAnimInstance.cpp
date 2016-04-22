@@ -41,3 +41,11 @@ void UGladiatorAnimInstance::FootTrace(USkeletalMeshComponent* mesh, FVector roo
 
     
 }
+
+/*
+void UGladiatorAnimInstance::HandleHandIK(USkeletalMeshComponent * skelMeshComponent, FName socketName, FTransform& IKTransform)
+{
+     skelMeshComponent->GetSocketTransform(socketName);
+
+}
+*/
