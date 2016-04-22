@@ -68,6 +68,7 @@ void UDodgeState::ProcessInput(float DeltaTime)
 
 void UDodgeState::ExecuteDodge()
 {
+	//UE_LOG(LogTemp, Warning, TEXT("Called execute dodge"));
 	bExecutedDodge = true;
 	//decrement number of times you can use the charge
 	CurrentChargesRemaining -= 1;

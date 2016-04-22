@@ -66,14 +66,15 @@ public:
 	/**Changes the current lower body state
 	@param newState is the new lowerbody state you want to transition to
 	*/
-
-    UFUNCTION(Server, Reliable, WithValidation)
-    void ChangeLowerState_Server(class ULowerBodyState* newState);
-
-	UFUNCTION(NetMulticast, Reliable, WithValidation)
 	virtual void ChangeLowerState(class ULowerBodyState* newState);
+private: 
+	virtual void Internal_ChangeLowerState(class ULowerBodyState* newState);
+    UFUNCTION(Server, Reliable, WithValidation)
+	void ChangeLowerState_Server(class ULowerBodyState* newState);
+	UFUNCTION(NetMulticast, Reliable, WithValidation)
+	void ChangeLowerState_Multicast(class ULowerBodyState* newState);
 
+public:
 	float FPS60ToSeconds = 0.0166667f;
-
 	void MoveDirection(float _xValue, float _yValue);
 };

@@ -79,10 +79,15 @@ bool UGladiatorState::ChangeUpperState_Validate(class UUpperBodyState* newState)
 	return true;
 }
 
-
-void UGladiatorState::ChangeLowerState_Implementation(ULowerBodyState* newState)
+//===========================================================================================
+void UGladiatorState::ChangeLowerState(ULowerBodyState* newState)
 {
-
+	//Internal_ChangeLowerState(newState);
+	//calls a function which runs on the server which then calls a multicast of the inter CLS
+	ChangeLowerState_Server(newState);
+}
+void UGladiatorState::Internal_ChangeLowerState(class ULowerBodyState* newState)
+{
 	if (newState->Get_bCanUse())
 	{
 		Glad->CurrentLowerState->OnStopState();
@@ -90,24 +95,26 @@ void UGladiatorState::ChangeLowerState_Implementation(ULowerBodyState* newState)
 		Glad->PreviousLowerState->TimeSinceStateStarted = 0;
 		Glad->CurrentLowerState = newState;
 		Glad->CurrentLowerState->OnBeginState();
-		UE_LOG(LogTemp, Warning, TEXT("changed into %s "), *Glad->CurrentLowerState->GetName());
+		//UE_LOG(LogTemp, Warning, TEXT("%s changed into %s "), *Glad->GetName(), *Glad->CurrentLowerState->GetName());
 	}
 }
-bool UGladiatorState::ChangeLowerState_Validate(class ULowerBodyState* newState)
-{
-	return true;
-}
-
 void UGladiatorState::ChangeLowerState_Server_Implementation(ULowerBodyState * newState)
 {
-    ChangeLowerState(newState);
+    ChangeLowerState_Multicast(newState);
 }
-
 bool UGladiatorState::ChangeLowerState_Server_Validate(ULowerBodyState * newState)
 {
     return true;
 }
-
+void UGladiatorState::ChangeLowerState_Multicast_Implementation(class ULowerBodyState* newState)
+{
+	Internal_ChangeLowerState(newState);
+}
+bool UGladiatorState::ChangeLowerState_Multicast_Validate(class ULowerBodyState* newState)
+{
+	return true;
+}
+//=======================================================================================
 void UGladiatorState::MoveDirection(float _xValue, float _yValue)
 {
 	Glad->AddMovementInput(Glad->GetActorForwardVector(), _xValue);
