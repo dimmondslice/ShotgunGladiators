@@ -49,22 +49,15 @@ void UGladiatorState::OnBeginState(){}
 void UGladiatorState::OnStopState(){}
 void UGladiatorState::PauseState(){}
 
-void UGladiatorState::ChangeUpperState_Server_Implementation(UUpperBodyState* newState)
+//=================================================================================================
+void UGladiatorState::ChangeUpperState(UUpperBodyState* newState)
 {
-    ChangeUpperState(newState);
+	//Internal_ChangeUpperState(newState);
+	//calls a function which runs on the server which then calls a multicast of the inter CLS
+	ChangeUpperState_Server(newState);
 }
-bool UGladiatorState::ChangeUpperState_Server_Validate(UUpperBodyState* newState)
+void UGladiatorState::Internal_ChangeUpperState(class UUpperBodyState* newState)
 {
-    return true;
-}
-
-void UGladiatorState::ChangeUpperState_Implementation(UUpperBodyState* newState)
-{
-    /*
-    if (Glad->Role < ROLE_Authority) {
-        ChangeUpperState_Server(newState);
-    }
-    */
 	if (newState->Get_bCanUse())
 	{
 		Glad->CurrentUpperState->OnStopState();
@@ -72,9 +65,22 @@ void UGladiatorState::ChangeUpperState_Implementation(UUpperBodyState* newState)
 		Glad->PreviousUpperState->TimeSinceStateStarted = 0;
 		Glad->CurrentUpperState = newState;
 		Glad->CurrentUpperState->OnBeginState();
+		//UE_LOG(LogTemp, Warning, TEXT("%s changed into %s "), *Glad->GetName(), *Glad->CurrentUpperState->GetName());
 	}
 }
-bool UGladiatorState::ChangeUpperState_Validate(class UUpperBodyState* newState)
+void UGladiatorState::ChangeUpperState_Server_Implementation(UUpperBodyState * newState)
+{
+	ChangeUpperState_Multicast(newState);
+}
+bool UGladiatorState::ChangeUpperState_Server_Validate(UUpperBodyState * newState)
+{
+	return true;
+}
+void UGladiatorState::ChangeUpperState_Multicast_Implementation(class UUpperBodyState* newState)
+{
+	Internal_ChangeUpperState(newState);
+}
+bool UGladiatorState::ChangeUpperState_Multicast_Validate(class UUpperBodyState* newState)
 {
 	return true;
 }

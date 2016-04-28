@@ -58,14 +58,19 @@ public:
 	@param newState is the new upperbody state you want to transition to
 	*/
 
-    UFUNCTION(Server, Reliable, WithValidation)
-    void ChangeUpperState_Server(class UUpperBodyState* newState);
-
-	UFUNCTION(NetMulticast, Reliable, WithValidation)
+public:
 	virtual void ChangeUpperState(class UUpperBodyState* newState);
+private:
+	virtual void Internal_ChangeUpperState(class UUpperBodyState* newState);
+	UFUNCTION(Server, Reliable, WithValidation)
+		void ChangeUpperState_Server(class UUpperBodyState* newState);
+	UFUNCTION(NetMulticast, Reliable, WithValidation)
+		void ChangeUpperState_Multicast(class UUpperBodyState* newState);
+
 	/**Changes the current lower body state
 	@param newState is the new lowerbody state you want to transition to
 	*/
+public:
 	virtual void ChangeLowerState(class ULowerBodyState* newState);
 private: 
 	virtual void Internal_ChangeLowerState(class ULowerBodyState* newState);
