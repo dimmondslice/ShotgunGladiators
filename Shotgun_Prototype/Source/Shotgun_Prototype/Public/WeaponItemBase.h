@@ -62,7 +62,10 @@ public:
 
     UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = "Weapon Stats")
     bool isOnFireCooldown;
-
+    /*
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon|Effects")
+    UCameraShake* camShake;
+    */
     //********** Crashes when EditAnywhere is in UPROPERTY **********
         //Don't forget to uncomment Header File
     //UPROPERTY(BlueprintReadWrite, Category = "WeaponStats")
