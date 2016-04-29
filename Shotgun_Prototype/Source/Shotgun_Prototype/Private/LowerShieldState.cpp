@@ -22,6 +22,8 @@ void ULowerShieldState::TickState(float DeltaTime)
 
 void ULowerShieldState::DestroyShield_Server_Implementation()
 {
+    //check(Glad->HeldShield);
+    if (!Glad->HeldShield) return;
 	Glad->HeldShield->Destroy();
 }
 bool ULowerShieldState::DestroyShield_Server_Validate()
