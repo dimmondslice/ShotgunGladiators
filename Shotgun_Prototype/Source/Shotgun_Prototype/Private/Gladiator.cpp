@@ -1,7 +1,8 @@
 
-#include "UnrealNetwork.h"
 
 #include "Shotgun_Prototype.h"
+#include "UnrealNetwork.h"
+
 #include "Gladiator.h"
 #include "Shotgun_PrototypeProjectile.h"
 #include "Animation/AnimInstance.h"
