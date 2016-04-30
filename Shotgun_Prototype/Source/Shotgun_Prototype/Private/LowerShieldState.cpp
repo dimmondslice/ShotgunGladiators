@@ -22,7 +22,7 @@ void ULowerShieldState::TickState(float DeltaTime)
 
 void ULowerShieldState::DestroyShield_Server_Implementation()
 {
-    UE_LOG(LogTemp, Error, TEXT("destroy shield"));
+    //UE_LOG(LogTemp, Error, TEXT("destroy shield"));
 
     //check(Glad->HeldShield);
     if (!Glad->HeldShield) return;

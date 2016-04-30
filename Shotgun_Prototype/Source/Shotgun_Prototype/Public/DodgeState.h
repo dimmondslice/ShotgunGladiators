@@ -15,6 +15,9 @@ class SHOTGUN_PROTOTYPE_API UDodgeState : public ULowerBodyState
 
 public:
 	UDodgeState();
+
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
 public:
 	UPROPERTY(EditAnywhere)
 	float DodgeForce;			//How strong is the sideways dodgeforce
@@ -30,6 +33,8 @@ public:
 private:
 	
 	float CurrentRechargeTimer;
+
+    UPROPERTY(Replicated)
 	bool bExecutedDodge;
 
 public:
@@ -55,7 +60,7 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	virtual void BeginPlay() override;
 
-
+    //UFUNCTION(Server, Reliable, WithValidation)
 	void ExecuteDodge();
 
 };

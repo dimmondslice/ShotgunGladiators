@@ -161,12 +161,18 @@ private:
 	void SetFireReleased();
 	void SetReloadPressed();
 	void SetReloadReleased();
+
     UFUNCTION(Server, Reliable, WithValidation)
 	void SetShieldPressed();
     UFUNCTION(Server, Reliable, WithValidation)
 	void SetShieldReleased();
+
+    //MAY NOT BE THE BEST APPROACH. COME BACK AND REEVALUATE WHEN WE DON'T HAVE A PRESSING DEADLINE
+    UFUNCTION(Server, Reliable, WithValidation)
 	void SetDodgePressed();
+    UFUNCTION(Server, Reliable, WithValidation)
 	void SetDodgeReleased();
+
 	void SetMoveForwardAxis(float val);
 	void SetMoveRightAxis(float val);
 public:
@@ -195,7 +201,10 @@ protected:
     UPROPERTY(Replicated)
 	bool bShieldAction;
 
+    //MAY NOT BE THE BEST APPROACH. COME BACK AND REEVALUATE WHEN WE DON'T HAVE A PRESSING DEADLINE
+    UPROPERTY(Replicated)
 	bool bDodgeAction;
+
 	float MoveForwardAxis;
 	float MoveRightAxis;
 	FVector MoveAxes;

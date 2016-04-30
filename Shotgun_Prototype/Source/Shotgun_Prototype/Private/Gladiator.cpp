@@ -95,6 +95,7 @@ void AGladiator::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> & OutLifet
     Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
     DOREPLIFETIME(AGladiator, bShieldAction);
+    DOREPLIFETIME(AGladiator, bDodgeAction);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -283,8 +284,12 @@ bool AGladiator::SetShieldPressed_Validate() { return true; }
 void AGladiator::SetShieldReleased_Implementation() { bShieldAction = false; }
 bool AGladiator::SetShieldReleased_Validate() { return true; }
 
-void AGladiator::SetDodgePressed() { bDodgeAction = true; }
-void AGladiator::SetDodgeReleased() { bDodgeAction = false; }
+void AGladiator::SetDodgePressed_Implementation() { bDodgeAction = true; }
+bool AGladiator::SetDodgePressed_Validate() { return true; }
+
+void AGladiator::SetDodgeReleased_Implementation() { bDodgeAction = false; }
+bool AGladiator::SetDodgeReleased_Validate() { return true; }
+
 void AGladiator::SetMoveForwardAxis(float val)
 {
 	MoveForwardAxis = val;

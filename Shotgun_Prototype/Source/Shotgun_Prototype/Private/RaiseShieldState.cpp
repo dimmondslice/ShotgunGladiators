@@ -25,7 +25,7 @@ void URaiseShieldState::TickState(float DeltaTime)
 
 void URaiseShieldState::SpawnShield_Server_Implementation()
 {
-	UE_LOG(LogTemp, Warning, TEXT("raise shield tick state"));
+	//UE_LOG(LogTemp, Warning, TEXT("raise shield tick state"));
 	SpawnShieldEvent.Broadcast();
 }
 bool URaiseShieldState::SpawnShield_Server_Validate()

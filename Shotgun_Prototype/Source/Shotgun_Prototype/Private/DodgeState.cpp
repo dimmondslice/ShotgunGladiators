@@ -1,6 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Shotgun_Prototype.h"
+#include "UnrealNetwork.h"
+
 #include "DodgeState.h"
 #include "walkingState.h"
 #include "FallingState.h"
@@ -11,6 +13,15 @@ UDodgeState::UDodgeState()
 	CurrentRechargeTimer = RechargeTime;
 	bExecutedDodge = false;
 }
+
+void UDodgeState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+    DOREPLIFETIME(UDodgeState, bExecutedDodge);
+}
+
+
 bool UDodgeState::Get_bCanUse()
 {
 	//update the ability to use this state
@@ -48,6 +59,11 @@ void UDodgeState::TickState(float DeltaTime)
 	//actually execute the dodge
 	if (TimeSinceStateStarted > 6 * FPS60ToSeconds && !bExecutedDodge)
 	{
+        //if (Glad->Role < ROLE_Authority) { return; }
+        if (!Glad->IsLocallyControlled()) { return; }//DO NOT CALL DODGING EXECUTION UNLESS SIGNALLED BY CONTROLLING PLAYER
+
+        //UE_LOG(LogTemp, Error, TEXT("Execute Dodge Call"));
+
 		ExecuteDodge();
 	}
 	//temporary fix for if you dodge into a slope
@@ -76,8 +92,8 @@ void UDodgeState::ExecuteDodge()
 	CurrentRechargeTimer = RechargeTime;
 
 	//create dodge direction by adding your forward vector and right vector Multiplied by your stick direction
-	FVector LaunchDir = Glad->GetActorForwardVector() * Glad->MoveForwardAxis +
-		Glad->GetActorRightVector() * Glad->MoveRightAxis;
+	FVector LaunchDir = (Glad->GetActorForwardVector() * Glad->MoveForwardAxis) +
+		                (Glad->GetActorRightVector() * Glad->MoveRightAxis);
 	if (LaunchDir.IsNearlyZero())
 		LaunchDir = Glad->GetActorForwardVector();
 	LaunchDir *= DodgeForce;
@@ -87,6 +103,7 @@ void UDodgeState::ExecuteDodge()
 	//BeginDodgeEvent();
 	BeginDodgeEvent.Broadcast();
 }
+
 
 void UDodgeState::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction * ThisTickFunction)
 {
