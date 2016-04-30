@@ -1,4 +1,6 @@
 
+#include "UnrealNetwork.h"
+
 #include "Shotgun_Prototype.h"
 #include "Gladiator.h"
 #include "Shotgun_PrototypeProjectile.h"
@@ -86,6 +88,13 @@ AGladiator::AGladiator()
 	CurrentLowerState = LowerIdle;
 
 	WalkSpeed = 10.f;
+}
+
+void AGladiator::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> & OutLifetimeProps) const
+{
+    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+    DOREPLIFETIME(AGladiator, bShieldAction);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -267,8 +276,13 @@ void AGladiator::SetFirePressed() { bFireAction = true; }
 void AGladiator::SetFireReleased() { bFireAction = false; }
 void AGladiator::SetReloadPressed() { bReloadAction = true; }
 void AGladiator::SetReloadReleased() { bReloadAction = false; }
-void AGladiator::SetShieldPressed() { bShieldAction = true; }
-void AGladiator::SetShieldReleased() { bShieldAction = false; }
+
+void AGladiator::SetShieldPressed_Implementation() { bShieldAction = true; }
+bool AGladiator::SetShieldPressed_Validate() { return true; }
+
+void AGladiator::SetShieldReleased_Implementation() { bShieldAction = false; }
+bool AGladiator::SetShieldReleased_Validate() { return true; }
+
 void AGladiator::SetDodgePressed() { bDodgeAction = true; }
 void AGladiator::SetDodgeReleased() { bDodgeAction = false; }
 void AGladiator::SetMoveForwardAxis(float val)
@@ -292,7 +306,7 @@ void AGladiator::Tick(float DeltaSeconds)
 	CurrentUpperState->TickState(DeltaSeconds);
 	CurrentLowerState->TickState(DeltaSeconds);
 	
-	UE_LOG(LogTemp, Warning, TEXT("%s is in %s"), *GetName(), *CurrentLowerState->GetName());
+	//UE_LOG(LogTemp, Warning, TEXT("%s is in %s"), *GetName(), *CurrentLowerState->GetName());
 }
 
 void AGladiator::Landed(const FHitResult & Hit)
@@ -302,7 +316,7 @@ void AGladiator::Landed(const FHitResult & Hit)
 
 void AGladiator::LaunchCharacter_Server_Implementation(FVector LaunchVelocity, bool bXYOverride, bool bZOverride)
 {
-    UE_LOG(LogTemp, Warning, TEXT("called implementation"));
+    //UE_LOG(LogTemp, Warning, TEXT("called implementation"));
     LaunchCharacter(LaunchVelocity, bXYOverride, bZOverride);
 }
 bool AGladiator::LaunchCharacter_Server_Validate(FVector LaunchVelocity, bool bXYOverride, bool bZOverride)

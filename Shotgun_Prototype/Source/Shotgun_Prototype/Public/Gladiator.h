@@ -139,6 +139,9 @@ public:
 public:
 	virtual void BeginPlay() override;
     
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
+
 public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Gladiator|Attributes")
     struct FGladiatorAttributes attributes;
@@ -158,7 +161,9 @@ private:
 	void SetFireReleased();
 	void SetReloadPressed();
 	void SetReloadReleased();
+    UFUNCTION(Server, Reliable, WithValidation)
 	void SetShieldPressed();
+    UFUNCTION(Server, Reliable, WithValidation)
 	void SetShieldReleased();
 	void SetDodgePressed();
 	void SetDodgeReleased();
@@ -186,7 +191,10 @@ protected:
 	bool bJumpAction;
 	bool bFireAction;
 	bool bReloadAction;
+
+    UPROPERTY(Replicated)
 	bool bShieldAction;
+
 	bool bDodgeAction;
 	float MoveForwardAxis;
 	float MoveRightAxis;
